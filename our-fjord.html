@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>document.documentElement.setAttribute("data-theme",localStorage.getItem("portfolio-theme")||"dark");</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/images/logo.png?v=logo6" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=logo6" />
+    <title>Our Fjord, Our Future — Nikolai Yago Conde</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/base.css?v=projnav3" />
+    <link rel="stylesheet" href="/css/tap-to-join.css?v=phonetop4" />
+  </head>
+  <body class="page-ofof">
+    <!--
+      ============================================
+      OUR FJORD, OUR FUTURE — case study (scaffold)
+      ============================================
+      Header → hero poster banner → intro (summary + team + logos) → final result (gigamap) → next.
+      Shared chrome: logo nav + top-right utils.
+      Assets: public/images/our-fjord/ + Vite assets/our-fjord/ (ofof-assets.js).
+      Gallery cover: pipe/crab (assets/covers/our-fjord.png). In-page banner: poster-cover.png (Frame 55 / poster + drawing). Typography cover kept at hero/typography-cover.png.
+    -->
+
+    <nav class="site-nav site-nav--project" aria-label="Primary">
+      <div class="site-nav__shell">
+                <span class="site-nav__logo" aria-hidden="true">
+          <img
+            src="/images/logo.svg?v=logo7"
+            alt=""
+            width="80"
+            height="80"
+          />
+        </span>
+        <div class="site-nav__mouth">
+          <div class="site-nav__menu">
+            <a class="site-nav__link" data-nav="me" href="/index.html" data-i18n="nav.me">Me</a>
+            <a class="site-nav__link" data-nav="cases" href="/case-studies.html" aria-label="Case Studies"><span class="site-nav__link-line">Case</span><span class="site-nav__link-line">Studies</span></a>
+            <a class="site-nav__link" data-nav="collection" href="/collection.html" data-i18n="nav.collection">Collection</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="site-utils" aria-label="Site utilities">
+      <button
+        type="button"
+        class="site-utils__menu-btn"
+        data-utils-open
+        aria-expanded="false"
+        aria-controls="site-utils-panel"
+        data-i18n-attr="aria-label:utils.menu"
+      >
+        <span class="site-utils__menu-icon" aria-hidden="true"></span>
+      </button>
+
+      <div class="site-utils__panel" id="site-utils-panel">
+        <button
+          type="button"
+          class="site-utils__close"
+          data-utils-close
+          data-i18n-attr="aria-label:utils.close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+
+        <div class="site-utils__langs" role="group" data-i18n-attr="aria-label:utils.lang">
+          <button type="button" class="site-utils__lang" data-lang="NO">NO</button>
+          <button type="button" class="site-utils__lang" data-lang="ENG">ENG</button>
+          <button type="button" class="site-utils__lang" data-lang="ESP">ESP</button>
+        </div>
+
+        <button type="button" class="site-utils__theme" data-theme-toggle aria-label="Theme">
+          <span class="site-utils__theme-icon" aria-hidden="true"></span>
+          <span data-theme-label data-i18n="utils.dark">Dark</span>
+        </button>
+
+        <!-- Mail: phone utils grid cell; desktop fixed FAB (position:fixed escapes panel) -->
+        <button
+          type="button"
+          class="home-mail"
+          id="copy-email"
+          data-email="nikolaiconde@gmail.com"
+          data-i18n-attr="aria-label:home.email"
+        >
+          <span class="home-mail__label" aria-live="polite">
+            <svg class="home-mail__copy-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="8" y="8" width="12" height="12" rx="2.5" stroke="currentColor" stroke-width="2" />
+              <path
+                d="M6 14.5V6.5A2.5 2.5 0 0 1 8.5 4H16"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            <span data-i18n="home.email_copied">Email Copied</span>
+          </span>
+          <span class="home-mail__icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="2" />
+              <path
+                d="M4 7.5 12 13l8-5.5"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+
+
+    <div class="ttj">
+      <section class="ttj-hero-wrap" data-section id="hero">
+        <div class="ttj-hero ttj-hero--cover ttj-hero--ofof">
+          <img
+            class="ttj-img"
+            data-ofof-hero
+            src="/images/our-fjord/hero/poster-cover.png?v=ofof36"
+            alt="Our Fjord, Our Future — exhibition poster and fjord illustration."
+            width="1632"
+            height="659"
+            fetchpriority="high"
+            decoding="sync"
+          />
+        </div>
+        <header class="ttj-header">
+          <h1 data-i18n="ofof.title">Our Fjord, Our Future</h1>
+          <p class="ttj-header__subtitle" data-i18n="ofof.subtitle">Systems-oriented design - Sustainability &amp; environment / August–October 2025</p>
+          <div class="ttj-tags">
+            <span class="ttj-tags__label" data-i18n="ofof.tags">Tags:</span>
+            <span class="ttj-tag" data-i18n="ofof.tag_1">Systems thinking</span>
+            <span class="ttj-tag" data-i18n="ofof.tag_2">Collaboration</span>
+            <span class="ttj-tag" data-i18n="ofof.tag_3">Sustainability</span>
+            <span class="ttj-tag" data-i18n="ofof.tag_4">Civic engagement</span>
+            <span class="ttj-tag" data-i18n="ofof.tag_5">Regenerative Design</span>
+          </div>
+          <p class="ttj-duration">
+            <span class="ttj-duration__label" data-i18n="ofof.duration_label">Duration:</span>
+            <span class="ttj-duration__value" data-i18n="ofof.duration">7 weeks</span>
+          </p>
+        </header>
+      </section>
+
+      <section class="ttj-intro ttj-block" data-section id="intro">
+        <div class="ttj-intro__copy">
+          <p data-i18n="ofof.hook">
+            Connect solutions to save the Oslo Fjord.
+          </p>
+          <p data-i18n="ofof.intro_p1">
+            This project was initiated by our teacher, Abel, who connected us with organisations working on the Oslofjord watershed, including NIVA and Pådriv Oslo.
+          </p>
+          <p data-i18n="ofof.intro_p2">
+            We researched on site and in workshops, mapped stakeholders, initiatives and pain points, and used scenarios and visual methods to make the system easier to grasp.
+          </p>
+          <p data-i18n="ofof.intro_p3">
+            We came to see the river as an interconnected system — and how design can help communicate its challenges to a wider audience.
+          </p>
+        </div>
+        <div class="ttj-intro__team">
+          <div class="ttj-intro__group">
+            <h2 data-i18n="ofof.participants">Master students</h2>
+            <div class="ttj-person">
+              <img
+                class="ttj-img"
+                src="/images/me/nikolai-yago-conde.png?v=portrait3"
+                data-local="/images/me/nikolai-yago-conde.png?v=portrait3"
+                data-me-person="nikolai"
+                alt="Nikolai Yago Conde"
+                width="60"
+                height="60"
+              />
+              <div>
+                <a href="https://www.linkedin.com/in/nikolai-yago-conde-3231773b3/" target="_blank" rel="noopener noreferrer">Nikolai Yago Conde</a>
+                <p data-i18n="ofof.role_designer">Designer</p>
+              </div>
+            </div>
+            <div class="ttj-person">
+              <img
+                class="ttj-img"
+                src="/images/our-fjord/team/participant-placeholder.jpg?v=ofof16"
+                data-local="/images/our-fjord/team/participant-placeholder.jpg?v=ofof16"
+                data-ofof-person="participant"
+                alt="Patr Leelarasamee"
+                width="60"
+                height="60"
+              />
+              <div>
+                <p class="ttj-person__name">
+                  Patr Leelarasamee
+                  <a
+                    class="ttj-person__mail"
+                    href="mailto:bingpatr0@gmail.com"
+                    data-i18n-attr="aria-label:ofof.email_patr"
+                    aria-label="Email Patr Leelarasamee"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="2" />
+                      <path
+                        d="M4 7.5 12 13l8-5.5"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </a>
+                </p>
+                <p data-i18n="ofof.role_architect_designer">Architect and designer</p>
+              </div>
+            </div>
+            <div class="ttj-person">
+              <img
+                class="ttj-img"
+                src="/images/our-fjord/team/participant-placeholder.jpg?v=ofof16"
+                data-local="/images/our-fjord/team/participant-placeholder.jpg?v=ofof16"
+                data-ofof-person="participant"
+                alt="Yixuan Sun"
+                width="60"
+                height="60"
+              />
+              <div>
+                <p class="ttj-person__name">
+                  Yixuan Sun
+                  <a
+                    class="ttj-person__mail"
+                    href="mailto:sunyixuan419@163.com"
+                    data-i18n-attr="aria-label:ofof.email_yixuan"
+                    aria-label="Email Yixuan Sun"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="2" />
+                      <path
+                        d="M4 7.5 12 13l8-5.5"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </a>
+                </p>
+                <p data-i18n="ofof.role_architect">Architect</p>
+              </div>
+            </div>
+          </div>
+          <div class="ttj-intro__group">
+            <h2 data-i18n="ofof.supervisors">Supervisors</h2>
+            <div class="ttj-person">
+              <img
+                class="ttj-img"
+                src="/images/our-fjord/team/abel-crawford.jpg?v=ofof16"
+                data-local="/images/our-fjord/team/abel-crawford.jpg?v=ofof16"
+                data-ofof-person="abel"
+                alt="Abel Ben Aleck Crawford"
+                width="60"
+                height="60"
+              />
+              <div>
+                <a href="https://www.linkedin.com/in/abelcrawford/" target="_blank" rel="noopener noreferrer">Abel Ben Aleck Crawford</a>
+                <p data-i18n="ofof.role_abel">Teacher · Systemic Designer / Regenerative Systems</p>
+              </div>
+            </div>
+            <div class="ttj-person">
+              <img
+                class="ttj-img"
+                src="/images/our-fjord/team/jonathan-romm.jpg?v=ofof16"
+                data-local="/images/our-fjord/team/jonathan-romm.jpg?v=ofof16"
+                data-ofof-person="jonathan"
+                alt="Jonathan Romm"
+                width="60"
+                height="60"
+              />
+              <div>
+                <a href="https://www.linkedin.com/in/jonathan-romm-05437/" target="_blank" rel="noopener noreferrer">Jonathan Romm</a>
+                <p data-i18n="ofof.role_jonathan">Course Coordinator · Systemic Designer</p>
+              </div>
+            </div>
+            <div class="ttj-person">
+              <img
+                class="ttj-img"
+                src="/images/our-fjord/team/andreas-wettre.jpg?v=ofof16"
+                data-local="/images/our-fjord/team/andreas-wettre.jpg?v=ofof16"
+                data-ofof-person="andreas"
+                alt="Andreas Wettre"
+                width="60"
+                height="60"
+              />
+              <div>
+                <a href="https://www.linkedin.com/in/andreas-wettre-988405/" target="_blank" rel="noopener noreferrer">Andreas Wettre</a>
+                <p data-i18n="ofof.role_andreas">Teacher · Systemic Designer</p>
+              </div>
+            </div>
+          </div>
+          <div class="ttj-intro__group">
+            <h2 data-i18n="ofof.collaborators">Collaborators</h2>
+            <p class="ttj-org">NIVA</p>
+            <div class="ttj-person">
+              <img
+                class="ttj-img"
+                src="/images/our-fjord/team/saskia-trubbach.jpg?v=ofof19"
+                data-local="/images/our-fjord/team/saskia-trubbach.jpg?v=ofof19"
+                data-ofof-person="saskia"
+                alt="Saskia Trubbach"
+                width="60"
+                height="60"
+              />
+              <div>
+                <a href="https://www.linkedin.com/in/saskia-trubbach-a109401b8/" target="_blank" rel="noopener noreferrer">Saskia Trubbach</a>
+                <p data-i18n="ofof.role_senior_researcher">Senior Researcher · Political scientist</p>
+              </div>
+            </div>
+            <div class="ttj-person">
+              <img
+                class="ttj-img"
+                src="/images/our-fjord/team/maren-saevold.jpg?v=ofof19"
+                data-local="/images/our-fjord/team/maren-saevold.jpg?v=ofof19"
+                data-ofof-person="maren"
+                alt="Maren Helene Sævold"
+                width="60"
+                height="60"
+              />
+              <div>
+                <a href="https://www.linkedin.com/in/marenhelene/" target="_blank" rel="noopener noreferrer">Maren Helene Sævold</a>
+                <p data-i18n="ofof.role_research_assistant">Research Assistant · Economist</p>
+              </div>
+            </div>
+            <p class="ttj-org">Pådriv</p>
+            <div class="ttj-person">
+              <img
+                class="ttj-img"
+                src="/images/our-fjord/team/anna-linstad.jpg?v=ofof19"
+                data-local="/images/our-fjord/team/anna-linstad.jpg?v=ofof19"
+                data-ofof-person="anna"
+                alt="Anna Linstad"
+                width="60"
+                height="60"
+              />
+              <div>
+                <a href="https://www.linkedin.com/in/annalinstad/" target="_blank" rel="noopener noreferrer">Anna Linstad</a>
+                <p data-i18n="ofof.role_urban_planner">Urban Planner</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ttj-sponsors ttj-sponsors--row ofof-sponsors" aria-label="Partners">
+          <span class="kyr-logo kyr-logo--aho ofof-logo">
+            <img
+              class="ttj-img kyr-logo__on-dark"
+              data-ofof-logo="aho"
+              data-ofof-logo-theme="dark"
+              alt="The Oslo School of Architecture and Design"
+              width="617"
+              height="181"
+            />
+            <img
+              class="ttj-img kyr-logo__on-light"
+              data-ofof-logo="aho"
+              data-ofof-logo-theme="light"
+              alt=""
+              width="617"
+              height="181"
+              aria-hidden="true"
+            />
+          </span>
+          <span class="kyr-logo kyr-logo--niva ofof-logo">
+            <img
+              class="ttj-img kyr-logo__on-dark"
+              data-ofof-logo="niva"
+              data-ofof-logo-theme="dark"
+              alt="Norwegian Institute for Water Research"
+              width="707"
+              height="294"
+            />
+            <img
+              class="ttj-img kyr-logo__on-light"
+              data-ofof-logo="niva"
+              data-ofof-logo-theme="light"
+              alt=""
+              width="707"
+              height="294"
+              aria-hidden="true"
+            />
+          </span>
+          <span class="kyr-logo kyr-logo--padriv ofof-logo">
+            <img
+              class="ttj-img kyr-logo__on-dark"
+              data-ofof-logo="padriv"
+              data-ofof-logo-theme="dark"
+              alt="Pådriv Oslo"
+              width="1200"
+              height="313"
+            />
+            <img
+              class="ttj-img kyr-logo__on-light"
+              data-ofof-logo="padriv"
+              data-ofof-logo-theme="light"
+              alt=""
+              width="1200"
+              height="313"
+              aria-hidden="true"
+            />
+          </span>
+          <span class="kyr-logo kyr-logo--socentral ofof-logo">
+            <img
+              class="ttj-img kyr-logo__on-dark"
+              data-ofof-logo="socentral"
+              data-ofof-logo-theme="dark"
+              alt="SoCentral"
+              width="244"
+              height="78"
+            />
+            <img
+              class="ttj-img kyr-logo__on-light"
+              data-ofof-logo="socentral"
+              data-ofof-logo-theme="light"
+              alt=""
+              width="244"
+              height="78"
+              aria-hidden="true"
+            />
+          </span>
+        </div>
+      </section>
+
+      <!-- Final result (Urban Gigamap) — after intro -->
+      <div
+        class="ofof-finished ttj-block"
+        id="finished"
+        aria-label="Final result: Oslofjord Watershed Urban Gigamap"
+      >
+        <div class="kyr-stack" id="ofof-result-stack"></div>
+      </div>
+
+      <section
+        class="ttj-next"
+        data-section
+        id="next"
+        style="background:#ff5100;color:#111;width:100%;margin:80px 0 0;padding:64px 0 100px;box-sizing:border-box;border-radius:28px 28px 0 0;"
+      >
+        <h2 data-i18n="ofof.next">Next project</h2>
+        <a class="ttj-next__card" href="/rema.html">
+          <div class="ttj-next__visual">
+            <img
+              src="/images/covers/rema.png?v=rema1"
+              alt=""
+              width="1024"
+              height="1024"
+            />
+          </div>
+          <div class="ttj-next__copy">
+            <p class="ttj-next__eyebrow">“Rema1000 redesign”</p>
+            <p class="ttj-next__title" data-i18n="ofof.next_title">Ease employees' daily rush</p>
+          </div>
+        </a>
+      </section>
+    </div>
+
+    <p class="site-live-count" aria-live="polite" hidden>
+      <span data-visitor-count></span>
+      <span data-i18n="utils.visiting">visiting</span>
+    </p>
+
+    <script src="/js/case-study-images.js?v=ofof30"></script>
+    <script src="/js/translations.js?v=yixuanmail1"></script>
+    <script src="/js/i18n.js?v=phonetop4"></script>
+    <script src="/js/theme.js"></script>
+    <script src="/js/site-utils.js?v=phonetop4"></script>
+    <script src="/js/site-mail.js?v=phonetop4"></script>
+    <script src="/js/presence.js?v=livecount2"></script>
+    <script src="/js/site-nav.js?v=mouthfix2"></script>
+    <script src="/js/keyboard-nav.js?v=stops2"></script>
+    <script type="module" src="/js/ofof-assets.js?v=ofof33"></script>
+    <script type="module" src="/js/me-assets.js?v=portrait3"></script>
+    <script src="/js/watermark.js?v=wm5"></script>
+    <script src="/js/case-study.js?v=unlock190670"></script>
+    <script src="/js/content-guard.js?v=6"></script>
+  </body>
+</html>

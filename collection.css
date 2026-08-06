@@ -1,0 +1,110 @@
+/*
+  Collection page — placeholder until content is ready.
+*/
+
+.collection {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 40px 60px;
+  width: min(900px, calc(100% - 40px));
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.collection__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(56px, 10vw, 140px);
+  line-height: 0.95;
+}
+
+/* Desktop: line spans sit flush so "Collec"+"tion" reads as one word */
+.collection__title span {
+  display: inline;
+}
+
+.collection__title span:empty {
+  display: none;
+}
+
+.collection__lead {
+  margin: 20px 0 0;
+  max-width: 36ch;
+  font-size: clamp(16px, 2vw, 22px);
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  /*
+    Full-bleed under top-left chrome — title stretches full column width.
+  */
+  .collection {
+    width: 100%;
+    max-width: none;
+    padding: var(--phone-nav-clearance, 76px) 16px 60px;
+    justify-content: flex-start;
+    align-items: stretch;
+    box-sizing: border-box;
+  }
+
+  /*
+    Phone title: smaller display size; each line letter-spaced in JS
+    to stretch and fill the full content width (same idea as Case Studies).
+  */
+  .collection__title {
+    --phone-hero-name-size: min(100px, calc(100 / 430 * 100vw), 24vw);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--phone-hero-name-size) !important;
+    line-height: 0.82;
+    letter-spacing: 0;
+    color: var(--text) !important;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: normal;
+    width: 100%;
+    max-width: none;
+    overflow: visible;
+  }
+
+  html[data-theme="dark"] .collection__title {
+    color: #ffffff !important;
+    mix-blend-mode: normal;
+  }
+
+  html[data-theme="light"] .collection__title {
+    color: var(--text) !important;
+    mix-blend-mode: normal;
+  }
+
+  .collection__title span {
+    display: block;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    letter-spacing: 0;
+  }
+
+  .collection__title span:empty {
+    display: none;
+  }
+
+  .collection__lead {
+    width: 100%;
+    max-width: none;
+    margin: 20px 0 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: left;
+  }
+}

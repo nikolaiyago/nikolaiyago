@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>document.documentElement.setAttribute("data-theme",localStorage.getItem("portfolio-theme")||"dark");</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/images/logo.png?v=logo6" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=logo6" />
+    <title>Cashier Interface Redesign — Rema 1000 — Nikolai Yago Conde</title>
+
+    <link rel="preload" as="image" href="/images/rema/hero/banner.png" fetchpriority="high" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://www.figma.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/base.css?v=projnav3" />
+    <link rel="stylesheet" href="/css/tap-to-join.css?v=phonetop4" />
+  </head>
+  <body class="page-rema">
+    <!--
+      ============================================
+      REMA 1000 — Cashier Interface Redesign
+      ============================================
+      Figma node 670:5031 (hero + intro). Sections from Import:
+      Cover, Analysis, Design, Result. No Prototype section.
+      Assets: public/images/rema/<section>/ + Vite assets/rema/
+    -->
+
+    <nav class="site-nav site-nav--project" aria-label="Primary">
+      <div class="site-nav__shell">
+                <span class="site-nav__logo" aria-hidden="true">
+          <img
+            src="/images/logo.svg?v=logo7"
+            alt=""
+            width="80"
+            height="80"
+          />
+        </span>
+        <div class="site-nav__mouth">
+          <div class="site-nav__menu">
+            <a class="site-nav__link" data-nav="me" href="/index.html" data-i18n="nav.me">Me</a>
+            <a class="site-nav__link" data-nav="cases" href="/case-studies.html" aria-label="Case Studies"><span class="site-nav__link-line">Case</span><span class="site-nav__link-line">Studies</span></a>
+            <a class="site-nav__link" data-nav="collection" href="/collection.html" data-i18n="nav.collection">Collection</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="site-utils" aria-label="Site utilities">
+      <button
+        type="button"
+        class="site-utils__menu-btn"
+        data-utils-open
+        aria-expanded="false"
+        aria-controls="site-utils-panel"
+        data-i18n-attr="aria-label:utils.menu"
+      >
+        <span class="site-utils__menu-icon" aria-hidden="true"></span>
+      </button>
+
+      <div class="site-utils__panel" id="site-utils-panel">
+        <button
+          type="button"
+          class="site-utils__close"
+          data-utils-close
+          data-i18n-attr="aria-label:utils.close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+
+        <div class="site-utils__langs" role="group" data-i18n-attr="aria-label:utils.lang">
+          <button type="button" class="site-utils__lang" data-lang="NO">NO</button>
+          <button type="button" class="site-utils__lang" data-lang="ENG">ENG</button>
+          <button type="button" class="site-utils__lang" data-lang="ESP">ESP</button>
+        </div>
+
+        <button type="button" class="site-utils__theme" data-theme-toggle aria-label="Theme">
+          <span class="site-utils__theme-icon" aria-hidden="true"></span>
+          <span data-theme-label data-i18n="utils.dark">Dark</span>
+        </button>
+
+        <!-- Mail: phone utils grid cell; desktop fixed FAB (position:fixed escapes panel) -->
+        <button
+          type="button"
+          class="home-mail"
+          id="copy-email"
+          data-email="nikolaiconde@gmail.com"
+          data-i18n-attr="aria-label:home.email"
+        >
+          <span class="home-mail__label" aria-live="polite">
+            <svg class="home-mail__copy-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="8" y="8" width="12" height="12" rx="2.5" stroke="currentColor" stroke-width="2" />
+              <path
+                d="M6 14.5V6.5A2.5 2.5 0 0 1 8.5 4H16"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            <span data-i18n="home.email_copied">Email Copied</span>
+          </span>
+          <span class="home-mail__icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="2" />
+              <path
+                d="M4 7.5 12 13l8-5.5"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+
+
+    <div class="ttj">
+      <section class="ttj-hero-wrap" data-section id="hero">
+        <div class="ttj-hero ttj-hero--cover ttj-hero--rema">
+          <img
+            class="ttj-img"
+            data-rema-hero
+            src="/images/rema/hero/banner.png"
+            alt="REMA 1000 Redesign — cashier terminal mockup"
+            width="3508"
+            height="1416"
+            fetchpriority="high"
+            decoding="sync"
+          />
+        </div>
+        <header class="ttj-header">
+          <h1 data-i18n="rema.title">Cashier Interface Redesign</h1>
+          <p class="ttj-header__subtitle" data-i18n="rema.subtitle">Interaction design - Food / January 2026</p>
+          <div class="ttj-tags">
+            <span class="ttj-tags__label" data-i18n="rema.tags">Tags:</span>
+            <span class="ttj-tag" data-i18n="rema.tag_info">Information design</span>
+            <span class="ttj-tag" data-i18n="rema.tag_research">Analysing</span>
+            <span class="ttj-tag" data-i18n="rema.tag_proto">Psychology</span>
+            <span class="ttj-tag" data-i18n="rema.tag_strategic">Strategic design</span>
+          </div>
+          <p class="ttj-duration">
+            <span class="ttj-duration__label" data-i18n="rema.duration_label">Duration:</span>
+            <span class="ttj-duration__value" data-i18n="rema.duration">1 week</span>
+          </p>
+        </header>
+      </section>
+
+      <section class="ttj-intro ttj-block" data-section id="intro">
+        <div class="ttj-intro__copy">
+          <p data-i18n="rema.intro_p1">
+            Every day, thousands of cashiers in Norway use a system that is outdated and poorly designed. How is it possible that in 2026, we still don't make these tools better for the people who use them most.
+          </p>
+          <p data-i18n="rema.intro_p2">
+            The task was to select an existing digital interface, identify where the user experience breaks down, recreate the original, and redesign it — justifying every decision through UX principles and interaction design theory. I chose the REMA 1000 cashier interface because I use it every day. New employees consistently struggle with it — common tasks require unnecessary memorisation, slow down the checkout process, and increase the chance of errors. That was the problem worth solving.
+          </p>
+        </div>
+        <div class="ttj-intro__team">
+          <div class="ttj-intro__group">
+            <h2 data-i18n="rema.designers">Designer</h2>
+            <div class="ttj-person">
+              <img
+                class="ttj-img"
+                src="/images/me/nikolai-yago-conde.png?v=portrait3"
+                data-local="/images/me/nikolai-yago-conde.png?v=portrait3"
+                data-me-person="nikolai"
+                alt="Nikolai Yago Conde"
+                width="60"
+                height="60"
+              />
+              <div>
+                <a href="https://www.linkedin.com/in/nikolai-yago-conde-3231773b3/?skipRedirect=true" target="_blank" rel="noreferrer">Nikolai Yago Conde</a>
+                <p data-i18n="rema.role_student">Interaction designer Student</p>
+              </div>
+            </div>
+          </div>
+          <div class="ttj-intro__group">
+            <h2 data-i18n="rema.supervisor">Supervisor</h2>
+            <div class="ttj-person">
+              <img
+                class="ttj-img"
+                src="https://www.figma.com/api/mcp/asset/5e0a468e-a742-4fca-9ded-42ab8a72df22"
+                data-remote="https://www.figma.com/api/mcp/asset/5e0a468e-a742-4fca-9ded-42ab8a72df22"
+                alt=""
+                width="60"
+                height="60"
+              />
+              <div>
+                <a href="https://www.linkedin.com/in/diogovalerio/" target="_blank" rel="noreferrer">Diogo Valério</a>
+                <p data-i18n="rema.role_mentor">Mentor - Course leader</p>
+              </div>
+            </div>
+            <div class="ttj-person">
+              <img
+                class="ttj-img"
+                src="https://www.figma.com/api/mcp/asset/c6e8a265-3cd8-4807-a07c-d0ca9943735a"
+                data-remote="https://www.figma.com/api/mcp/asset/c6e8a265-3cd8-4807-a07c-d0ca9943735a"
+                alt=""
+                width="60"
+                height="60"
+              />
+              <div>
+                <a href="https://www.linkedin.com/in/movito/" target="_blank" rel="noreferrer">Fredrik Matheson</a>
+                <p data-i18n="rema.role_tutor">Tutor</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ttj-sponsors ttj-sponsors--row rema-sponsors" aria-label="Partners">
+          <span class="kyr-logo kyr-logo--aho rema-logo">
+            <img
+              class="ttj-img kyr-logo__on-dark"
+              data-rema-logo="aho"
+              data-rema-logo-theme="dark"
+              alt="The Oslo School of Architecture and Design"
+              width="482"
+              height="194"
+            />
+            <img
+              class="ttj-img kyr-logo__on-light"
+              data-rema-logo="aho"
+              data-rema-logo-theme="light"
+              alt=""
+              width="482"
+              height="194"
+              aria-hidden="true"
+            />
+          </span>
+        </div>
+      </section>
+
+      <section class="ttj-section ttj-block" data-section id="challenge">
+        <h2 class="ttj-section__heading"><span class="ttj-section__number">00</span> <span data-i18n="rema.s00">Challenge &amp; my role</span></h2>
+        <div class="ttj-challenge">
+          <div class="ttj-challenge__media">
+            <div class="ttj-challenge__visual ttj-challenge__visual--fill">
+              <a
+                href="https://www.figma.com/community/file/1478302528360816893/laws-of-ux-presentation-with-examples"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  data-rema-challenge
+                  src="/images/rema/challenge/laws-of-ux-cover.png?v=rema9"
+                  alt="Laws of UX presentation cover"
+                  width="1920"
+                  height="1080"
+                />
+              </a>
+            </div>
+            <p class="ttj-challenge__laws-note">
+              <span data-i18n="rema.laws_note"
+                >Justifying every decision through UX principles and interaction design theory — with help from Laws of UX.</span
+              >
+              <a
+                class="ttj-challenge__laws-link"
+                href="https://lawsofux.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-i18n-attr="aria-label:rema.laws_link_aria"
+                aria-label="Laws of UX website"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M14 4h6v6"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M10 14 20 4"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M20 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+            </p>
+            <p class="ttj-challenge__laws-hint" data-i18n="rema.laws_hint">
+              The cover opens the Figma file; the icon links to the Laws of UX website.
+            </p>
+          </div>
+          <div class="ttj-challenge__copy">
+            <h3 data-i18n="rema.challenge_h">Challenge</h3>
+            <p data-i18n="rema.challenge_p">
+              Select an existing digital interface, identify where the user experience breaks down, recreate the original, and redesign it — justifying every decision through UX principles and interaction design theory.
+            </p>
+            <h3 data-i18n="rema.role_h">My role</h3>
+            <p data-i18n="rema.role_p1">
+              Solo project. I chose the REMA 1000 cashier interface because I use it every day at work. I analysed the existing system, mapped pain points, recreated the original interface, and redesigned it for clearer hierarchy and fewer errors.
+            </p>
+            <p data-i18n="rema.role_p2">
+              Content for challenge visuals and deeper role notes will land when more import assets arrive.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="ttj-section ttj-block" data-section id="analysis">
+        <h2 class="ttj-section__heading"><span class="ttj-section__number">01</span> <span data-i18n="rema.s01">Analysis</span></h2>
+        <p class="ttj-section__text ttj-analysis__caption" id="analysis-caption" data-i18n="rema.a1">
+          Context — the current REMA 1000 cashier interface
+        </p>
+        <div class="ttj-analysis">
+          <div class="ttj-analysis__frame ttj-analysis__frame--fill">
+            <img
+              id="analysis-image"
+              src="/images/rema/analysis/00.png"
+              alt="Analysis board 1 of 8"
+              width="1920"
+              height="1080"
+            />
+          </div>
+          <div class="ttj-analysis__bar">
+            <button type="button" class="ttj-analysis__btn" id="analysis-prev" data-i18n-attr="aria-label:rema.prev">‹</button>
+            <div
+              class="ttj-analysis__track"
+              role="progressbar"
+              aria-valuemin="1"
+              aria-valuemax="8"
+              aria-valuenow="1"
+              data-i18n-attr="aria-label:rema.progress"
+              id="analysis-progress"
+            >
+              <div class="ttj-analysis__fill" id="analysis-progress-fill"></div>
+            </div>
+            <button type="button" class="ttj-analysis__btn" id="analysis-next" data-i18n-attr="aria-label:rema.next_aria">›</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="ttj-section ttj-block" data-section id="design">
+        <h2 class="ttj-section__heading"><span class="ttj-section__number">02</span> <span data-i18n="rema.s02">Design</span></h2>
+        <p class="ttj-section__text" data-i18n="rema.design_p">
+          Redesigning the action layer: clearer hierarchy, larger targets, and icons that match how cashiers actually work.
+        </p>
+        <div class="kyr-stack" id="design-stack" aria-label="Design boards">
+          <!-- Filled by rema-assets + case-study.js -->
+        </div>
+      </section>
+
+      <section class="ttj-section ttj-block" data-section id="result">
+        <h2 class="ttj-section__heading"><span class="ttj-section__number">03</span> <span data-i18n="rema.s03">Result</span></h2>
+        <div class="kyr-stack" id="result-stack" aria-label="Result boards">
+          <!-- Filled by rema-assets + case-study.js -->
+        </div>
+        <div class="ttj-result">
+          <div>
+            <h3 data-i18n="rema.process">Process</h3>
+            <ul>
+              <li data-i18n="rema.process_1">Mapped the live cashier interface and its daily pain points</li>
+              <li data-i18n="rema.process_2">Recreated the original before proposing redesigns</li>
+              <li data-i18n="rema.process_3">Justified layout and interaction changes with UX principles</li>
+            </ul>
+          </div>
+          <div>
+            <h3 data-i18n="rema.concept">Concept</h3>
+            <ul>
+              <li data-i18n="rema.concept_1">Clearer visual hierarchy and larger touch targets for busy checkout</li>
+              <li data-i18n="rema.concept_2">Final interface shown in a live REMA 1000 checkout context</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="ttj-section ttj-block" data-section id="retrospective">
+        <h2 class="ttj-section__heading"><span class="ttj-section__number">04</span> <span data-i18n="rema.s04">Retrospective</span></h2>
+        <p class="ttj-section__text" data-i18n="rema.framework_intro">
+          With little time to work through all 29 Laws of UX, I needed an easier, more intuitive way to plan while still considering most of them. I organised the laws into categories, and built a framework with help from Claude.
+        </p>
+        <!-- Framework HTML at /public/rema/ux-analysis-framework-v2.html is unused; banner is view-only after unlock. -->
+        <div class="ttj-retro ttj-retro--blurred ttj-retro--framework" id="retro">
+          <img
+            class="ttj-img"
+            data-rema-retro
+            src="/images/rema/retrospective/ux-analysis-framework.png"
+            alt="UX Analysis Framework — psychology and UX law pills"
+            width="3543"
+            height="1772"
+          />
+          <form class="ttj-retro__unlock" id="unlock-form">
+            <p data-i18n="rema.unlock">Enter the 6-digit code to view the full process</p>
+            <input id="unlock-code" type="text" inputmode="numeric" maxlength="6" placeholder="••••••" aria-label="Unlock code" />
+            <button type="submit" data-i18n="rema.unlock_btn">Unlock</button>
+            <span id="unlock-error" hidden data-i18n="rema.unlock_err">Incorrect code</span>
+          </form>
+        </div>
+        <p class="ttj-section__text" data-i18n="rema.retro_p">
+          If you have received my visit card, there is a code written that will give you access to view my documented process on paper. I sketch to have a database that allows me to extract previous info and make better planning in the future.
+        </p>
+      </section>
+
+      <section
+        class="ttj-next"
+        data-section
+        id="next"
+        style="background:#ff5100;color:#111;width:100%;margin:80px 0 0;padding:64px 0 100px;box-sizing:border-box;border-radius:28px 28px 0 0;"
+      >
+        <h2 data-i18n="rema.next">Next project</h2>
+        <div class="ttj-next__card ttj-next__card--soon" aria-disabled="true">
+          <div class="ttj-next__visual">
+            <img
+              src="/images/covers/aneo.png"
+              alt=""
+              width="1024"
+              height="1024"
+            />
+            <div class="study__soon" aria-hidden="true">
+              <span class="study__soon-text" data-i18n="cases.coming_soon">Next project to be added...</span>
+            </div>
+          </div>
+          <div class="ttj-next__copy">
+            <p class="ttj-next__eyebrow">“ANEO”</p>
+            <p class="ttj-next__title" data-i18n="rema.next_title">Make sharing a private charger pay off.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <p class="site-live-count" aria-live="polite" hidden>
+      <span data-visitor-count></span>
+      <span data-i18n="utils.visiting">visiting</span>
+    </p>
+
+    <script src="/js/case-study-images.js?v=me1"></script>
+    <script src="/js/translations.js?v=devices1"></script>
+    <script src="/js/i18n.js?v=phonetop4"></script>
+    <script src="/js/theme.js"></script>
+    <script src="/js/site-utils.js?v=phonetop4"></script>
+    <script src="/js/site-mail.js?v=phonetop4"></script>
+    <script src="/js/presence.js?v=livecount2"></script>
+    <script src="/js/site-nav.js?v=mouthfix2"></script>
+    <script src="/js/keyboard-nav.js?v=stops2"></script>
+    <script type="module" src="/js/me-assets.js?v=portrait3"></script>
+    <script type="module" src="/js/rema-assets.js?v=rema15"></script>
+    <script src="/js/watermark.js?v=wm5"></script>
+    <script src="/js/case-study.js?v=unlock190670"></script>
+    <script src="/js/content-guard.js?v=6"></script>
+  </body>
+</html>

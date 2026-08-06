@@ -1,0 +1,19 @@
+{
+  "name": "case-studies",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k -n web,presence -c cyan,magenta \"vite\" \"PRESENCE_PORT=8790 node presence/server.mjs\"",
+    "presence": "PRESENCE_PORT=8790 node presence/server.mjs",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "vite": "^6.3.0"
+  },
+  "dependencies": {
+    "ws": "^8.18.3"
+  }
+}

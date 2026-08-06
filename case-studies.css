@@ -1,0 +1,980 @@
+/*
+  ============================================
+  CASE STUDIES PAGE STYLES
+  ============================================
+  Snap scroller, hero, filters, project cards, side rail.
+  Colors / fonts / theme come from base.css (--text, --bg, --line, …).
+*/
+
+html,
+body {
+  height: 100%;
+  overflow: hidden; /* scrolling happens inside .page */
+}
+
+.page {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  background: var(--bg);
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-y: contain;
+}
+
+.logo {
+  position: fixed;
+  z-index: 40;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  text-decoration: none;
+  filter: drop-shadow(0 4px 2px rgba(0, 0, 0, 0.5));
+}
+
+.logo img {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  object-fit: contain;
+  margin-right: -8px;
+  display: block;
+}
+
+.logo__accent {
+  width: 8px;
+  height: 80px;
+  background: var(--logo-accent);
+  border-radius: 0 10px 10px 0;
+}
+
+.section-rail {
+  position: fixed;
+  z-index: 30;
+  top: 50%;
+  right: 28px;
+  transform: translateY(-50%);
+  padding: 18px 12px;
+  border-radius: 24px;
+}
+
+.section-rail__list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  /* Opaque strip so page art/text cannot peek between markers */
+  background: var(--bg);
+  padding: 6px 8px;
+  border-radius: 14px;
+}
+
+.section-rail__item {
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  cursor: pointer;
+  max-width: 280px;
+}
+
+.section-rail__label {
+  display: block;
+  max-width: 0;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+  text-align: right;
+  transition:
+    max-width 220ms ease,
+    max-height 220ms ease,
+    opacity 180ms ease,
+    color 160ms ease;
+}
+
+.section-rail__line {
+  display: block;
+  width: 28px;
+  height: 6px;
+  border-radius: 100px;
+  background: var(--line-rail);
+  transition:
+    width 220ms ease,
+    height 180ms ease,
+    background 180ms ease,
+    transform 180ms ease;
+}
+
+.section-rail__item--active .section-rail__line {
+  background: var(--accent);
+}
+
+.section-rail__item--active .section-rail__label {
+  color: var(--accent);
+}
+
+/* Introduction marker — square instead of dash */
+.section-rail__item[data-rail-id="hero"] .section-rail__line {
+  width: 10px;
+  height: 10px;
+  border-radius: 0;
+}
+
+.section-rail:hover .section-rail__label,
+.section-rail--open .section-rail__label,
+.section-rail:focus-within .section-rail__label {
+  max-width: 280px;
+  max-height: 24px;
+  opacity: 1;
+}
+
+.section-rail:hover .section-rail__line,
+.section-rail--open .section-rail__line,
+.section-rail:focus-within .section-rail__line {
+  width: 100%;
+  height: 8px;
+}
+
+.section-rail:hover .section-rail__item[data-rail-id="hero"] .section-rail__line,
+.section-rail--open .section-rail__item[data-rail-id="hero"] .section-rail__line,
+.section-rail:focus-within .section-rail__item[data-rail-id="hero"] .section-rail__line {
+  width: 10px;
+  height: 10px;
+  border-radius: 0;
+}
+
+.section-rail__item:hover .section-rail__label {
+  color: var(--text);
+}
+
+.section-rail__item:hover .section-rail__line {
+  transform: scaleY(1.15);
+}
+
+.section-rail__item--active:hover .section-rail__label {
+  color: var(--accent);
+}
+
+.snap-section {
+  /* Shared top inset so every study cover clears the tiger by the same gap */
+  --study-cover-top: 110px; /* desktop: logo @ 20px + ~80px mark + gap */
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  min-height: 100dvh;
+  scroll-snap-align: start; /* section top = viewport top */
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* covers align under logo — not vertically centered */
+  padding-top: var(--study-cover-top);
+  padding-bottom: 40px;
+  background: var(--bg);
+  flex-shrink: 0;
+}
+
+.snap-section--hero {
+  padding: 0 24px;
+  justify-content: center; /* hero stays centered */
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.hero {
+  /* Grow with the title so filters also sit in the same column */
+  width: fit-content;
+  max-width: calc(100% - 48px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 48px;
+}
+
+/*
+  Figma 811:7960
+  Outer box width = the title's natural width.
+  Copy stretches to that SAME width so left/right edges align
+  with the "C" and the final "S".
+*/
+.hero__head {
+  width: max-content; /* shrink-wrap to the title */
+  max-width: 100%;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; /* title + copy share identical outer edges */
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+.hero__title {
+  margin: 0;
+  width: max-content; /* this sets the shared outer box width */
+  max-width: 100%;
+  box-sizing: border-box;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(64px, 15.5vw, 300px); /* Figma: 300px */
+  line-height: 1;
+  text-align: left;
+  letter-spacing: 0;
+  white-space: nowrap;
+  color: var(--text);
+}
+
+/* Desktop keeps "Case STUDIES" as one visual line */
+.hero__title span + span::before {
+  content: "\00a0";
+}
+
+/* Same outer width as the title — two equal columns, 10px gap */
+.hero__copy {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%; /* 100% of hero__head = exact title width */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.hero__lead,
+.hero__note {
+  flex: 1 1 0;
+  min-width: 0;
+  margin: 0;
+  padding: 0; /* no inset — text edges = title edges */
+  box-sizing: border-box;
+}
+
+.hero__lead p,
+.hero__note p {
+  margin: 0;
+  padding: 0;
+  font-size: clamp(14px, 1.25vw, 24px); /* Figma: 24px */
+  line-height: normal;
+  color: var(--text);
+}
+
+.hero__lead {
+  text-align: left;
+}
+
+.hero__lead p {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-style: normal;
+}
+
+.hero__note {
+  border-radius: 0;
+  text-align: left;
+}
+
+.hero__note p {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-style: italic;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.filter {
+  appearance: none;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--text);
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-size: clamp(14px, 1.6cqi, 20px);
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  flex: 0 1 auto;
+}
+
+.filter--active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #000;
+  padding: 6px 18px;
+}
+
+.filter--disabled {
+  border-color: color-mix(in srgb, var(--text) 50%, transparent);
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+  cursor: not-allowed;
+}
+
+.study {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  align-items: center;
+  justify-content: center;
+  width: min(1729px, 100%);
+  padding: 40px 20px;
+}
+
+.study-link {
+  display: block;
+  width: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.study-link .study {
+  width: 100%;
+}
+
+.study-link--soon {
+  cursor: default;
+  pointer-events: none;
+}
+
+.study-link--favorite .study-visual {
+  outline: 1.5px solid #d4af37;
+  outline-offset: 4px;
+  transition: outline-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.study-link--favorite:hover .study-visual {
+  outline-color: #e8c547;
+  box-shadow:
+    0 0 0 5px rgba(212, 175, 55, 0.14),
+    0 0 16px 2px rgba(212, 175, 55, 0.38),
+    0 0 32px 6px rgba(212, 175, 55, 0.16);
+}
+
+.study-favorite-heart {
+  position: absolute;
+  z-index: 2;
+  right: 14px;
+  bottom: 14px;
+  display: flex;
+  line-height: 0;
+  pointer-events: none;
+}
+
+.study-favorite-heart svg {
+  display: block;
+}
+
+.study-favorite-heart svg path {
+  fill: rgba(0, 0, 0, 0.5);
+}
+
+.study--soon {
+  cursor: default;
+}
+
+.study-visual {
+  position: relative;
+  width: min(650px, 42vw);
+  aspect-ratio: 1;
+  border-radius: 20px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #000;
+}
+
+.study-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.study__soon {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+.study__soon-text {
+  margin: 0;
+  max-width: 90%;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(22px, 2.8vw, 40px);
+  line-height: 1.15;
+  color: #fff;
+  text-align: center;
+}
+
+.study__text {
+  width: min(650px, 42vw);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.study__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(28px, 3vw, 40px);
+  color: var(--accent);
+  line-height: 1.1;
+}
+
+.study__headline {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(40px, 6vw, 110px);
+  line-height: 0.95;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+.study__meta {
+  margin: 0;
+  font-size: clamp(16px, 1.4vw, 24px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .logo {
+    top: 20px;
+    left: 20px;
+  }
+
+  .snap-section {
+    /* Clear top-left tiger + utils by a fixed gap (same for every study cover) */
+    --study-cover-top: calc(var(--phone-nav-clearance, 76px) + 10px);
+    /* Right: opaque rail strip flush to edge; bottom: section-rail FAB only (dock removed) */
+    --phone-rail-clearance: max(48px, env(safe-area-inset-right, 0px) + 44px);
+    --phone-dock-clearance: calc(var(--phone-fab-bottom, 16px) + 52px);
+    padding-top: var(--study-cover-top);
+    padding-right: var(--phone-rail-clearance);
+    padding-bottom: var(--phone-dock-clearance);
+    padding-left: max(12px, env(safe-area-inset-left, 0px) + 8px);
+    justify-content: flex-start;
+  }
+
+  /* Hero: text/filters, not a cover — equal L/R so title centers on the page */
+  .snap-section--hero {
+    padding: var(--phone-nav-clearance, 76px) var(--phone-rail-clearance, 48px)
+      calc(var(--phone-fab-bottom, 16px) + 52px)
+      var(--phone-rail-clearance, 48px);
+    justify-content: flex-start;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  /*
+    Phone rail — closed: compact dashes vertically centered on the right.
+    Open: full-screen black overlay + label | dash rows (Figma-style menu).
+  */
+  .section-rail {
+    top: 50%;
+    bottom: auto;
+    right: max(4px, env(safe-area-inset-right, 0px));
+    transform: translateY(-50%);
+    padding: 10px 4px;
+    border-radius: 16px;
+    pointer-events: auto;
+    z-index: 40;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .section-rail__list {
+    gap: 5px;
+    padding: 8px 8px;
+    border-radius: 12px;
+  }
+
+  .section-rail__item {
+    max-width: min(240px, 62vw);
+    gap: 2px;
+    padding: 2px 0;
+  }
+
+  .section-rail__label {
+    display: block;
+    max-width: 0;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* Closed: short dashes only — hover/focus must not expand (press uses --open) */
+  .section-rail__line {
+    width: 28px;
+    height: 7px;
+    border-radius: 100px;
+    background: #3a3a3a;
+  }
+
+  .section-rail__item--active .section-rail__line {
+    background: var(--accent);
+    width: 28px;
+    height: 7px;
+  }
+
+  /* Introduction (Case STUDIES / hero) — square marker, distinct from project dashes */
+  .section-rail__item[data-rail-id="hero"] .section-rail__line {
+    width: 10px;
+    height: 10px;
+    min-width: 10px;
+    border-radius: 0;
+  }
+
+  .section-rail__item[data-rail-id="hero"].section-rail__item--active .section-rail__line {
+    width: 10px;
+    height: 10px;
+    min-width: 10px;
+    border-radius: 0;
+    background: var(--accent);
+  }
+
+  /* Neutralize base desktop hover/focus-within expand on phone closed rail */
+  .section-rail:hover .section-rail__label,
+  .section-rail:focus-within .section-rail__label {
+    max-width: 0;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+  }
+
+  .section-rail:hover .section-rail__line,
+  .section-rail:focus-within .section-rail__line {
+    width: 28px;
+    height: 7px;
+  }
+
+  .section-rail:hover .section-rail__item[data-rail-id="hero"] .section-rail__line,
+  .section-rail:focus-within .section-rail__item[data-rail-id="hero"] .section-rail__line {
+    width: 10px;
+    height: 10px;
+    min-width: 10px;
+    border-radius: 0;
+  }
+
+  .section-rail__item:hover .section-rail__label {
+    color: #fff;
+  }
+
+  .section-rail__item:hover .section-rail__line {
+    transform: none;
+  }
+
+  /* —— Open menu (matches reference) —— */
+  .section-rail.section-rail--open {
+    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: none;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: max(24px, env(safe-area-inset-top, 0px))
+      max(28px, env(safe-area-inset-right, 0px) + 12px)
+      max(28px, env(safe-area-inset-bottom, 0px))
+      max(24px, env(safe-area-inset-left, 0px));
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background: transparent;
+    z-index: 90;
+  }
+
+  .section-rail.section-rail--open::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #000;
+    opacity: 0.92;
+    pointer-events: none;
+  }
+
+  .section-rail.section-rail--open .section-rail__list {
+    position: relative;
+    z-index: 1;
+    gap: clamp(20px, 4.5vh, 36px);
+    width: min(340px, calc(100vw - 48px));
+    align-items: stretch;
+    /* Open menu uses full-screen ::before overlay — no solid list strip */
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .section-rail.section-rail--open .section-rail__item {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    width: 100%;
+    max-width: none;
+    padding: 0;
+  }
+
+  .section-rail.section-rail--open .section-rail__label {
+    display: block;
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: none;
+    max-height: none;
+    opacity: 1;
+    overflow: visible;
+    padding: 0;
+    font-family: var(--font-display);
+    font-size: clamp(22px, 6.2vw, 34px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    text-align: left;
+    color: #fff;
+    background: transparent;
+    text-shadow: none;
+    white-space: nowrap;
+  }
+
+  .section-rail.section-rail--open .section-rail__line {
+    flex: 0 0 auto;
+    width: 28px;
+    min-width: 28px;
+    height: 6px;
+    background: #fff;
+  }
+
+  .section-rail.section-rail--open .section-rail__item[data-rail-id="hero"] .section-rail__line {
+    width: 10px;
+    min-width: 10px;
+    height: 10px;
+    border-radius: 0;
+    background: #fff;
+  }
+
+  .section-rail.section-rail--open .section-rail__item--active .section-rail__label {
+    color: var(--accent);
+    background: transparent;
+  }
+
+  .section-rail.section-rail--open .section-rail__item--active .section-rail__line {
+    background: var(--accent);
+    width: 28px;
+    height: 6px;
+  }
+
+  .section-rail.section-rail--open .section-rail__item[data-rail-id="hero"].section-rail__item--active .section-rail__line {
+    width: 10px;
+    min-width: 10px;
+    height: 10px;
+    border-radius: 0;
+    background: var(--accent);
+  }
+
+  .section-rail.section-rail--open:hover .section-rail__line,
+  .section-rail.section-rail--open:focus-within .section-rail__line {
+    width: 28px;
+    min-width: 28px;
+    height: 6px;
+  }
+
+  .section-rail.section-rail--open:hover .section-rail__item[data-rail-id="hero"] .section-rail__line,
+  .section-rail.section-rail--open:focus-within .section-rail__item[data-rail-id="hero"] .section-rail__line {
+    width: 10px;
+    min-width: 10px;
+    height: 10px;
+    border-radius: 0;
+  }
+
+  .section-rail.section-rail--open .section-rail__item:hover .section-rail__label {
+    color: #fff;
+  }
+
+  .section-rail.section-rail--open .section-rail__item--active:hover .section-rail__label {
+    color: var(--accent);
+  }
+
+  /* Compact phone hero — title + copy shrink so filters clear the FABs */
+  .hero {
+    gap: 16px;
+    width: min(395px, 100%);
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .hero__head {
+    gap: 10px;
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+    align-items: center;
+    text-align: center;
+  }
+
+  /*
+    Phone Case Studies title: smaller than Collection, each line
+    letter-spaced in JS to stretch and fill the column width.
+  */
+  .snap-section--hero .hero__title {
+    --phone-hero-name-size: min(100px, calc(100 / 430 * 100vw), 24vw);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--phone-hero-name-size) !important;
+    line-height: 0.82;
+    letter-spacing: 0;
+    color: var(--text) !important;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: normal;
+    width: 100%;
+    max-width: none;
+  }
+
+  html[data-theme="dark"] .snap-section--hero .hero__title {
+    color: #ffffff !important;
+    mix-blend-mode: normal;
+  }
+
+  html[data-theme="light"] .snap-section--hero .hero__title {
+    color: var(--text) !important;
+    mix-blend-mode: normal;
+  }
+
+  .snap-section--hero .hero__title span {
+    display: block;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    letter-spacing: 0;
+  }
+
+  .snap-section--hero .hero__title span + span::before {
+    content: none;
+  }
+
+  .hero__copy {
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero__lead,
+  .hero__note {
+    padding: 0;
+    text-align: left;
+    width: 100%;
+  }
+
+  .hero__lead p,
+  .hero__note p {
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: left;
+  }
+
+  .filters {
+    gap: 8px 10px;
+    margin-top: 2px;
+    justify-content: center;
+  }
+
+  .filter {
+    font-size: 13px;
+    padding: 5px 12px;
+  }
+
+  .filter--active {
+    padding: 5px 14px;
+  }
+
+  /*
+    phonecard — featured phone card (match reference):
+    large rounded cover ~88vw, text column = cover width,
+    left-aligned under cover, group centered on screen.
+    Favorites only: gold outline (+ glow on hover where supported).
+  */
+  .study {
+    /* Cover + text column clear the right rail strip */
+    --phone-cover: min(400px, calc(100vw - var(--phone-rail-clearance, 48px) - 24px));
+    flex: 0 1 auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    min-height: 0;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .study-link,
+  .study-link .study {
+    width: 100%;
+  }
+
+  .study-visual {
+    width: var(--phone-cover);
+    max-width: 100%;
+    max-height: none;
+    aspect-ratio: 1;
+    flex-shrink: 0;
+    border-radius: 22px;
+    border: none;
+    box-sizing: border-box;
+    align-self: center;
+    outline: none;
+  }
+
+  .study-link--favorite .study-visual {
+    outline: 1.5px solid #d4af37;
+    outline-offset: 3px;
+    transition: outline-color 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  .study-link--favorite:hover .study-visual {
+    outline-color: #e8c547;
+    box-shadow:
+      0 0 0 5px rgba(212, 175, 55, 0.14),
+      0 0 16px 2px rgba(212, 175, 55, 0.38),
+      0 0 32px 6px rgba(212, 175, 55, 0.16);
+  }
+
+  .study-favorite-heart {
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .study-favorite-heart svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .study-favorite-heart svg path {
+    fill: rgba(0, 0, 0, 0.5);
+  }
+
+  .study__text {
+    width: var(--phone-cover);
+    max-width: 100%;
+    padding: 0;
+    gap: 10px;
+    align-self: center;
+    text-align: left;
+    box-sizing: border-box;
+  }
+
+  .study__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(18px, 5vw, 22px);
+    line-height: 1.2;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #ed720c;
+  }
+
+  .study__headline {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(42px, 11.5vw, 58px);
+    line-height: 0.95;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: #ffffff;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .study__meta {
+    margin-top: 2px;
+    font-size: clamp(15px, 4.2vw, 18px);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.35;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  /* Shorter phones: shrink cover so title stays above FABs; keep same logo gap */
+  @media (max-height: 740px) {
+    .snap-section:not(.snap-section--hero) {
+      padding-top: var(--study-cover-top);
+    }
+
+    .study {
+      --phone-cover: min(320px, 80vw);
+      gap: 16px;
+    }
+
+    .study__headline {
+      font-size: clamp(34px, 9.5vw, 48px);
+    }
+  }
+}
+
+/* Light mode: cover headline/meta readable on beige (overrides phone white) */
+html[data-theme="light"] .study__headline {
+  color: var(--text);
+}
+
+html[data-theme="light"] .study__meta {
+  color: var(--muted);
+}

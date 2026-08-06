@@ -1,0 +1,2202 @@
+/*
+  ============================================
+  TAP TO JOIN PAGE STYLES
+  ============================================
+  Long-scroll case study. Images & boxes scale with the viewport.
+  Theme-aware via base.css variables. Videos / unlock / reveal
+  behaviour lives in js/tap-to-join.js.
+*/
+
+html,
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: auto;
+  min-height: 100%;
+}
+
+/* Every image inside the page can shrink with its container */
+.ttj img {
+  max-width: 100%;
+  height: auto;
+}
+
+.ttj-block {
+  width: min(1674px, calc(100% - 32px));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ttj {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100%;
+  padding-bottom: 0;
+}
+
+.ttj-logo {
+  position: fixed;
+  z-index: 40;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  text-decoration: none;
+  filter: drop-shadow(0 4px 2px rgba(0, 0, 0, 0.5));
+}
+
+.ttj-logo img {
+  width: clamp(56px, 12vw, 80px);
+  height: clamp(56px, 12vw, 80px);
+  border-radius: 10px;
+  object-fit: contain;
+  margin-right: -8px;
+  display: block;
+}
+
+.ttj-logo__accent {
+  width: 8px;
+  height: clamp(56px, 12vw, 80px);
+  background: #ed720c;
+  border-radius: 0 10px 10px 0;
+}
+
+.ttj-hero {
+  width: 100%;
+  aspect-ratio: 1728 / 728;
+  max-height: min(728px, 70vw);
+  overflow: hidden;
+  border-radius: 0 0 10px 10px;
+  background: #111;
+}
+
+.ttj-hero img {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+  display: block;
+}
+
+.ttj-header,
+.ttj-intro,
+.ttj-sponsors,
+.ttj-section,
+.ttj-footer {
+  width: min(1674px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.ttj-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 40px 0 28px;
+  /* Align title / subtitle / tags with the intro hook + summary */
+  padding-left: 110px;
+  box-sizing: border-box;
+}
+
+.ttj-header h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(42px, 9vw, 150px);
+  line-height: 0.95;
+}
+
+.ttj-header__subtitle {
+  margin: 20px 0 0;
+  font-size: clamp(14px, 2vw, 24px);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--muted);
+}
+
+.ttj-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-top: 28px;
+}
+
+.ttj-tags__label {
+  font-size: clamp(14px, 1.8vw, 20px);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--muted);
+  margin-right: 4px;
+}
+
+.ttj-tag {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid color-mix(in srgb, var(--text) 28%, transparent);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: clamp(12px, 1.4vw, 15px);
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.2;
+  color: color-mix(in srgb, var(--text) 75%, transparent);
+  background: transparent;
+  cursor: default;
+  pointer-events: none;
+  user-select: none;
+}
+
+.ttj-tag + .ttj-tag::before {
+  content: none;
+  margin: 0;
+}
+
+.ttj-duration {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  align-items: baseline;
+  margin: 28px 0 0;
+  font-size: clamp(14px, 1.8vw, 20px);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--muted);
+}
+
+.ttj-duration__value {
+  color: color-mix(in srgb, var(--text) 70%, transparent);
+}
+
+.ttj-intro {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(20px, 3vw, 40px);
+  margin-top: 20px;
+}
+
+.ttj-intro__copy {
+  font-size: clamp(16px, 1.8vw, 24px);
+  line-height: 1.4;
+  /* Clear the fixed logo */
+  padding-left: 110px;
+  box-sizing: border-box;
+}
+
+.ttj-intro__copy p {
+  margin: 0 0 1rem;
+}
+
+.ttj-intro__team {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  min-width: 0;
+}
+
+.ttj-intro__group h2 {
+  margin: 0 0 16px;
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 600;
+}
+
+.ttj-person {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line-soft);
+  min-width: 0;
+}
+
+.ttj-person:last-child {
+  border-bottom: none;
+}
+
+.ttj-person img {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.ttj-person a,
+.ttj-person__name {
+  color: var(--text);
+  font-weight: 600;
+  font-size: clamp(14px, 1.6vw, 20px);
+  overflow-wrap: anywhere;
+}
+
+.ttj-person__name {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35em;
+  font-style: normal;
+}
+
+.ttj-person a.ttj-person__mail,
+.ttj-person .ttj-person__mail {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  line-height: 0;
+  flex-shrink: 0;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: inherit;
+  overflow-wrap: normal;
+}
+
+.ttj-person a.ttj-person__mail:hover,
+.ttj-person a.ttj-person__mail:focus-visible {
+  color: var(--accent);
+}
+
+.ttj-person .ttj-person__mail svg {
+  width: 0.85em;
+  height: 0.85em;
+  display: block;
+}
+
+.ttj-person .ttj-person__mail--disabled {
+  opacity: 0.4;
+  pointer-events: none;
+  cursor: default;
+  color: var(--muted);
+}
+
+.ttj-person p {
+  margin: 4px 0 0;
+  font-size: clamp(13px, 1.5vw, 20px);
+  font-style: italic;
+  font-weight: 300;
+}
+
+.ttj-sponsors {
+  margin: 30px auto 50px;
+  grid-column: 1 / -1;
+}
+
+.ttj-sponsors img {
+  width: min(482px, 100%);
+  height: auto;
+  display: block;
+}
+
+.ttj-section {
+  margin-bottom: clamp(40px, 6vw, 70px);
+}
+
+#analysis .ttj-section__heading {
+  margin-bottom: 12px;
+}
+
+#analysis .ttj-analysis__caption {
+  margin: 0 0 10px;
+  min-height: 0;
+}
+
+/* Videos — fluid, rounded frames */
+.ttj-video {
+  width: 100%;
+  border-radius: clamp(12px, 2vw, 20px);
+  overflow: hidden;
+  background: #111;
+}
+
+.ttj-video video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+/* Large demo before section 00 */
+.ttj-video--hero {
+  width: 100%;
+  max-width: 1674px;
+  margin: 0 auto;
+}
+
+.ttj-video--hero video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #000;
+}
+
+/* --------------------------------------------------
+   Result videos + HOST / Guest labels
+   Labels sit OUTSIDE the videos (not over the screen UI)
+   Desktop: HOST | phone | phone | Guest
+   Phone:   HOST / phone / Guest / phone  (labels centered above)
+   -------------------------------------------------- */
+.ttj-video-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr) auto;
+  grid-template-areas: "host vhost vguest guest";
+  gap: clamp(12px, 2.5vw, 28px);
+  margin-top: clamp(24px, 4vw, 40px);
+  align-items: center;
+  justify-items: center;
+}
+
+.ttj-devices__label--host {
+  grid-area: host;
+}
+
+.ttj-video--device-host {
+  grid-area: vhost;
+}
+
+.ttj-video--device-guest {
+  grid-area: vguest;
+}
+
+.ttj-devices__label--guest {
+  grid-area: guest;
+}
+
+.ttj-video--device {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: transparent;
+  overflow: visible;
+}
+
+.ttj-video--device video {
+  width: min(100%, 420px);
+  aspect-ratio: 9 / 16;
+  max-height: min(70vh, 720px);
+  margin: 0 auto;
+  object-fit: contain;
+  background: #000;
+  border-radius: clamp(12px, 2vw, 20px);
+}
+
+.ttj-video-row > .ttj-devices__label {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 72px);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.ttj-devices__label--host {
+  transform: rotate(180deg);
+}
+
+.ttj-section__heading {
+  margin: 0 0 28px;
+  font-family: var(--font-display);
+  font-size: clamp(36px, 8vw, 120px);
+  line-height: 1;
+  padding-left: 110px;
+  box-sizing: border-box;
+}
+
+/* Scroll-rise titles */
+.ttj-reveal {
+  opacity: 0;
+  transform: translate3d(0, 1.1em, 0);
+  filter: blur(6px);
+  transition:
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+}
+
+.ttj-reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  filter: blur(0);
+}
+
+.ttj-reveal .ttj-section__number {
+  display: inline-block;
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.08s,
+    color 0.9s ease 0.08s;
+  transform: translate3d(0, 0.35em, 0);
+}
+
+.ttj-reveal.is-visible .ttj-section__number {
+  transform: translate3d(0, 0, 0);
+  color: #ff5100;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ttj-reveal,
+  .ttj-reveal .ttj-section__number {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+
+  .ttj-reveal .ttj-section__number {
+    color: color-mix(in srgb, var(--text) 50%, transparent);
+  }
+
+  .ttj-reveal.is-visible .ttj-section__number {
+    color: color-mix(in srgb, var(--text) 50%, transparent);
+  }
+}
+
+.ttj-section__number {
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+}
+
+.ttj-section__text,
+.ttj-lead {
+  font-size: clamp(16px, 1.8vw, 20px);
+  line-height: 1.45;
+  margin: 0 0 24px;
+  /* Clear the fixed logo so it doesn’t sit on top of body copy */
+  padding-left: 110px;
+  padding-right: 110px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .ttj-section__text,
+  .ttj-lead,
+  .ttj-intro__copy,
+  .ttj-section__heading,
+  .ttj-header,
+  .ttj-next h2 {
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.ttj-lead {
+  font-size: clamp(18px, 2.4vw, 28px);
+  font-weight: 500;
+}
+
+.ttj-challenge {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 40px);
+  align-items: start;
+}
+
+.ttj-challenge__visual {
+  width: 100%;
+  max-width: 850px;
+  aspect-ratio: 1529 / 1080;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.ttj-challenge__visual a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ttj-challenge__visual img {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  border-radius: 15px;
+}
+
+.ttj-challenge__copy h3 {
+  margin: 0 0 12px;
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 500;
+}
+
+.ttj-challenge__copy p {
+  margin: 0 0 20px;
+  font-size: clamp(15px, 1.6vw, 20px);
+  line-height: 1.45;
+}
+
+.ttj-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ttj-carousel__frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1680 / 900;
+  border-radius: clamp(12px, 2vw, 20px);
+  overflow: hidden;
+  background: #111;
+}
+
+.ttj-carousel__frame > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+/* Arrows + progress sit under the image so they never cover it */
+.ttj-carousel__controls {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.ttj-carousel__btn {
+  width: clamp(44px, 7vw, 56px);
+  height: clamp(44px, 7vw, 56px);
+  border: none;
+  border-radius: 999px;
+  background: var(--accent, #ff5100);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  font-size: 36px;
+  line-height: 1;
+  font-weight: 400;
+}
+
+.ttj-carousel__btn span {
+  display: block;
+  transform: translateY(-2px);
+}
+
+.ttj-carousel__btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.ttj-carousel__progress {
+  position: relative;
+  height: 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 18%, transparent);
+  overflow: hidden;
+}
+
+.ttj-carousel__progress-fill {
+  height: 100%;
+  width: 20%;
+  border-radius: inherit;
+  background: var(--accent, #ff5100);
+  transition: width 0.25s ease;
+}
+
+.ttj-phones {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(10px, 2vw, 16px);
+  margin-bottom: 16px;
+}
+
+.ttj-phones__panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(8px, 1.5vw, 12px);
+  justify-content: center;
+  align-items: center;
+  background: #000902;
+  border-radius: 15px;
+  padding: clamp(20px, 4vw, 64px) clamp(12px, 2vw, 20px);
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+.ttj-phones__panel img {
+  width: min(45%, 353px);
+  max-width: 100%;
+  height: auto;
+  border-radius: clamp(24px, 4vw, 50px);
+  display: block;
+}
+
+.ttj-wires {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(8px, 1.5vw, 10px);
+  justify-content: center;
+  align-items: center;
+  background: #000902;
+  border-radius: 15px;
+  padding: clamp(24px, 5vw, 80px) clamp(12px, 2vw, 20px);
+  box-sizing: border-box;
+}
+
+.ttj-wires img {
+  width: min(18%, 295px);
+  min-width: min(110px, 28vw);
+  max-width: 100%;
+  height: auto;
+  border-radius: clamp(12px, 2vw, 20px);
+  display: block;
+  flex: 1 1 110px;
+}
+
+.ttj-full {
+  width: 100%;
+  height: auto;
+  border-radius: clamp(12px, 2vw, 20px);
+  display: block;
+  margin: 0 0 28px;
+  background: transparent;
+}
+
+.ttj-full--story {
+  aspect-ratio: auto;
+  object-fit: contain;
+  object-position: center top;
+}
+
+.ttj-photos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 24px);
+  margin-bottom: 28px;
+}
+
+.ttj-photos img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: clamp(12px, 2vw, 20px);
+  display: block;
+  background: #111;
+}
+
+.ttj-photos--session img {
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
+.ttj-note-photo {
+  width: min(875px, 100%);
+  margin: 0 auto 28px;
+  border-radius: clamp(12px, 2vw, 20px);
+  overflow: hidden;
+  background: #111;
+}
+
+.ttj-note-photo img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.ttj-result {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(20px, 3vw, 40px);
+  margin-bottom: 40px;
+}
+
+.ttj-result h3 {
+  margin: 0 0 16px;
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 500;
+}
+
+.ttj-result ul {
+  margin: 0;
+  padding-left: 1.3em;
+  font-size: clamp(15px, 1.6vw, 20px);
+  line-height: 1.5;
+}
+
+.ttj-retro {
+  position: relative;
+  width: 100%;
+  max-width: 1572px;
+  margin: 0 auto 24px;
+  aspect-ratio: 1572 / 1120;
+  border-radius: clamp(10px, 1.5vw, 12px);
+  overflow: hidden;
+  background: #111;
+}
+
+.ttj-retro img {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+  display: block;
+}
+
+.ttj-retro--blurred img {
+  filter: blur(28px);
+  transform: scale(1.04);
+}
+
+.ttj-retro__unlock {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(0, 0, 0, 0.35);
+  text-align: center;
+  padding: clamp(16px, 3vw, 24px);
+}
+
+/* display:flex above would otherwise keep the form visible after unlock */
+.ttj-retro__unlock[hidden],
+.ttj-retro.is-unlocked .ttj-retro__unlock {
+  display: none !important;
+}
+
+.ttj-retro__unlock p {
+  margin: 0;
+  font-size: clamp(14px, 2vw, 18px);
+}
+
+.ttj-retro__unlock input {
+  width: min(160px, 70vw);
+  text-align: center;
+  letter-spacing: 0.3em;
+  font-size: clamp(16px, 2vw, 20px);
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: rgba(0, 0, 0, 0.7);
+  color: var(--text);
+}
+
+.ttj-retro__unlock button {
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--text);
+  border-radius: 8px;
+  padding: 10px 18px;
+  cursor: pointer;
+}
+
+.ttj-retro__unlock span {
+  color: #ff7a7a;
+  font-size: 14px;
+}
+
+/* Rema — UX Analysis Framework retrospective (view-only after unlock)
+   Hug the banner image; do not reuse the notebook aspect-ratio box. */
+.page-rema .ttj-retro--framework {
+  aspect-ratio: auto;
+  height: auto;
+  background: #f4f2ee;
+}
+
+.page-rema .ttj-retro--framework img {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: unset;
+  display: block;
+}
+
+/* Overlay sits above the image while locked; form controls receive clicks */
+.page-rema .ttj-retro--framework .ttj-retro__unlock {
+  z-index: 2;
+  pointer-events: none;
+}
+
+.page-rema .ttj-retro--framework .ttj-retro__unlock > * {
+  pointer-events: auto;
+}
+
+.ttj-next {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 80px 0 0 !important;
+  padding: clamp(48px, 6vw, 72px) 0 clamp(72px, 8vw, 120px) !important;
+  /* Fill remaining viewport so the page bg doesn’t peek under the orange */
+  min-height: 100dvh;
+  background: #ff5100 !important;
+  color: #111 !important;
+  box-sizing: border-box;
+  border-radius: clamp(20px, 3vw, 32px) clamp(20px, 3vw, 32px) 0 0;
+}
+
+.ttj-next h2 {
+  width: min(1674px, calc(100% - 32px));
+  margin: 0 auto 32px;
+  padding-left: 110px;
+  box-sizing: border-box;
+  font-family: var(--font-display);
+  font-size: clamp(40px, 7vw, 96px);
+  color: #111;
+}
+
+.ttj-next__card {
+  width: min(1674px, calc(100% - 32px));
+  margin: 0 auto;
+  padding-left: 110px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 40px);
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Match Case Studies coming-soon cards (study-link--soon / study__soon) */
+.ttj-next__card--soon {
+  cursor: default;
+  pointer-events: none;
+}
+
+.ttj-next__visual .study__soon {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+.ttj-next__visual .study__soon-text {
+  margin: 0;
+  max-width: 90%;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(22px, 2.8vw, 40px);
+  line-height: 1.15;
+  color: #fff;
+  text-align: center;
+}
+
+.ttj-next__visual {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #111;
+}
+
+.ttj-next__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ttj-next__colors,
+.ttj-next__letters {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.ttj-next__letters img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  margin: auto;
+}
+
+.ttj-next__eyebrow {
+  margin: 0 0 10px;
+  color: #111;
+  font-family: var(--font-display);
+  font-size: clamp(24px, 4vw, 40px);
+}
+
+.ttj-next__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 5vw, 72px);
+  line-height: 1.05;
+}
+
+.ttj-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line-divider);
+  margin-top: 40px;
+}
+
+.ttj-footer a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: clamp(16px, 2vw, 20px);
+}
+
+/* ---- Tablet ---- */
+@media (max-width: 1100px) {
+  .ttj-challenge {
+    grid-template-columns: 1fr;
+  }
+
+  .ttj-challenge__visual {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .ttj-phones {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Phone ---- */
+@media (max-width: 900px) {
+  .ttj-block,
+  .ttj-header,
+  .ttj-intro,
+  .ttj-sponsors,
+  .ttj-section,
+  .ttj-footer {
+    width: calc(100% - 20px);
+  }
+
+  .ttj-header {
+    padding-top: 28px;
+    padding-bottom: 32px;
+  }
+
+  .ttj-header__subtitle {
+    margin-top: 18px;
+  }
+
+  .ttj-tags {
+    margin-top: 24px;
+  }
+
+  .ttj-duration {
+    margin-top: 24px;
+  }
+
+  .ttj-section__text,
+  .ttj-lead {
+    font-size: clamp(17px, 4.6vw, 20px);
+    line-height: 1.45;
+  }
+
+  .ttj-next h2,
+  .ttj-next__card {
+    width: calc(100% - 20px);
+    padding-left: 0;
+  }
+
+  .ttj-next {
+    margin-top: 48px !important;
+    padding: 40px 0 calc(var(--phone-fab-bottom, 16px) + 36px) !important;
+    min-height: 100dvh;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .ttj-hero {
+    max-height: 48vw;
+    border-radius: 0 0 8px 8px;
+  }
+
+  /* Jam promo banner: keep full composition (no side crop from max-height) */
+  .ttj-hero--jam {
+    max-height: none;
+  }
+
+  .ttj-intro,
+  .ttj-challenge,
+  .ttj-phones,
+  .ttj-photos,
+  .ttj-result,
+  .ttj-next__card,
+  .ttj-intro__team {
+    grid-template-columns: 1fr;
+  }
+
+  .ttj-phones__panel img {
+    width: min(42%, 200px);
+  }
+
+  .ttj-wires img {
+    width: min(30%, 160px);
+    min-width: 90px;
+    flex: 1 1 90px;
+  }
+
+  .ttj-video-row {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "host"
+      "vhost"
+      "guest"
+      "vguest";
+    gap: 14px 0;
+    justify-items: center;
+  }
+
+  .ttj-video--device video {
+    max-height: min(60vh, 560px);
+    width: min(100%, 320px);
+  }
+
+  .ttj-video-row > .ttj-devices__label {
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-size: clamp(28px, 8vw, 44px);
+    letter-spacing: 0.06em;
+    text-align: center;
+    width: 100%;
+    padding: 4px 0 2px;
+  }
+
+  .ttj-devices__label--host {
+    transform: none;
+  }
+}
+
+/* ==== ANALYSIS SLIDER (under image, no loop) ==== */
+/* Sized to clear fixed logo (left) + utils menu (right), with room to breathe */
+.ttj-analysis {
+  width: min(1480px, calc(100% - 200px));
+  max-width: none;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .ttj-analysis {
+    width: 100%;
+    margin-top: 8px;
+  }
+}
+
+.ttj-analysis__frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1680 / 900;
+  height: auto;
+  border-radius: clamp(12px, 2vw, 20px);
+  overflow: hidden;
+  background: #111;
+  /* Lock size — don’t let each PNG’s intrinsic size resize the box */
+  flex-shrink: 0;
+}
+
+.ttj-analysis__frame > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: contain;
+  object-position: center center;
+  display: block;
+}
+
+/* Know Your Rights only — research carousel (section 01) fills the frame */
+.page-kyr #analysis .ttj-analysis__frame {
+  aspect-ratio: 16 / 9; /* match research PNGs (1920×1080) */
+  background: #fff;
+}
+
+.page-kyr #analysis .ttj-analysis__frame > img,
+.ttj-analysis__frame--fill > img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* Know Your Rights — vertical image stacks (design + prototype + result) */
+.kyr-stack {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 4vw, 48px);
+  width: 100%;
+}
+
+.kyr-stack__item {
+  margin: 0;
+  width: 100%;
+}
+
+.kyr-stack__img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: clamp(12px, 2vw, 20px);
+  background: transparent;
+}
+
+/* Know Your Rights — Result: side poster + journey */
+.page-kyr .kyr-result-row,
+.kyr-result-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: clamp(20px, 2.5vw, 32px);
+  align-items: center;
+  width: 100%;
+  margin: 0 0 clamp(36px, 5vw, 64px);
+}
+
+.page-kyr .kyr-result-side,
+.kyr-result-side {
+  margin: 0;
+  width: 100%;
+  max-width: min(100%, 560px);
+  justify-self: stretch;
+}
+
+.page-kyr .kyr-result-side__img,
+.kyr-result-side__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: clamp(380px, 56vw, 680px);
+  object-fit: contain;
+  border-radius: clamp(12px, 2vw, 20px);
+  background: transparent;
+}
+
+@media (max-width: 720px) {
+  .page-kyr .kyr-result-row,
+  .kyr-result-row {
+    grid-template-columns: 1fr;
+  }
+
+  .page-kyr .kyr-result-side,
+  .kyr-result-side {
+    max-width: min(100%, 400px);
+    justify-self: center;
+  }
+}
+
+/* Know Your Rights — Result journey mini progress bar */
+.page-kyr .kyr-journey,
+.kyr-journey {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 3vw, 36px);
+  width: 100%;
+  margin: 0;
+  background: transparent;
+  min-width: 0;
+}
+
+.page-kyr .kyr-journey__stage,
+.kyr-journey__stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: clamp(280px, 42vw, 520px);
+  background: transparent;
+}
+
+/* Clip the white PNG so rounded corners are visible */
+.page-kyr .kyr-journey__frame,
+.kyr-journey__frame {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #fff;
+  line-height: 0;
+  isolation: isolate;
+  transform: translateZ(0);
+  clip-path: inset(0 round 24px);
+  -webkit-clip-path: inset(0 round 24px);
+}
+
+.page-kyr .kyr-journey__preview,
+.kyr-journey__preview {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: clamp(300px, 48vw, 560px);
+  object-fit: contain;
+  background: #fff;
+  border-radius: 24px !important;
+  transition: opacity 180ms ease;
+}
+
+.page-kyr .kyr-journey__bar,
+.kyr-journey__bar {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  padding: 8px 0 0;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Kill leftover progress track from older JS/CSS (browser cache) */
+.page-kyr .kyr-journey__track,
+.page-kyr .kyr-journey__fill,
+.kyr-journey__track,
+.kyr-journey__fill,
+.kyr-journey__bar::before,
+.kyr-journey__bar::after,
+.kyr-journey__steps::before,
+.kyr-journey__steps::after,
+.kyr-journey__step::before,
+.kyr-journey__step::after {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  max-width: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  content: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: none !important;
+}
+
+.page-kyr .kyr-journey__steps,
+.kyr-journey__steps {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(8px, 1.5vw, 16px);
+  align-items: end;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+.kyr-journey__step {
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  outline: none;
+  transition: transform 180ms ease, opacity 180ms ease, filter 180ms ease;
+  opacity: 0.42;
+  filter: grayscale(0.35);
+}
+
+.kyr-journey__step img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: clamp(100px, 17vw, 180px);
+  object-fit: contain;
+  background: transparent;
+  pointer-events: none;
+  user-select: none;
+}
+
+.kyr-journey__step.is-done {
+  opacity: 0.72;
+  filter: none;
+}
+
+.kyr-journey__step.is-active {
+  opacity: 1;
+  filter: none;
+  transform: translateY(-4px) scale(1.06);
+}
+
+.kyr-journey__step:focus-visible {
+  box-shadow: 0 0 0 2px var(--bg, #fff), 0 0 0 4px var(--accent, #ff5100);
+}
+
+.kyr-journey__step:hover {
+  opacity: 0.9;
+  filter: none;
+}
+
+@media (max-width: 640px) {
+  .kyr-journey__step.is-active {
+    transform: translateY(-2px) scale(1.04);
+  }
+}
+
+.ttj-analysis__bar {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.ttj-analysis__btn {
+  position: static;
+  box-sizing: border-box;
+  width: 52px;
+  height: 52px;
+  border: none;
+  border-radius: 999px;
+  background: #ff5100;
+  color: #fff;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  /* Optical center — ‹ › sit high in most fonts */
+  padding-bottom: 3px;
+}
+
+.ttj-analysis__btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.ttj-analysis__track {
+  height: 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 20%, transparent);
+  overflow: hidden;
+}
+
+.ttj-analysis__fill {
+  height: 100%;
+  width: 20%;
+  border-radius: inherit;
+  background: #ff5100;
+  transition: width 0.25s ease;
+}
+
+
+/* Tap To Join — Spotify Jam promo banner (Import …/Covers in Prodjects/TTJ.PNG) */
+.ttj-hero--jam {
+  aspect-ratio: 3508 / 1416;
+  max-height: none;
+  background: #000;
+}
+
+.ttj-hero--jam img {
+  object-fit: contain;
+  object-position: center;
+}
+
+/* Know Your rights — full illustration banner (not cropped like photo heroes) */
+.ttj-hero--cover {
+  aspect-ratio: 3379 / 2048;
+  background: #fff;
+}
+
+.ttj-hero--cover img {
+  object-fit: contain;
+  object-position: center;
+}
+
+/* Rema 1000 — blue redesign banner (Import Cover / Figma hero) */
+.page-rema .ttj-hero--rema {
+  aspect-ratio: 3508 / 1416;
+  background: #023ea5;
+}
+
+.page-rema .ttj-hero--rema img {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* WCAG — POUR cover banner (Import Cover.png) */
+.page-wcag .ttj-hero--wcag {
+  aspect-ratio: 1728 / 728;
+  background: #8966bf;
+}
+
+.page-wcag .ttj-hero--wcag img {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Our Fjord — poster + illustration hero (top of page, like other case studies).
+   Match poster-cover.png (1632×659); contain so the full composite is visible. */
+.page-ofof .ttj-hero--ofof {
+  aspect-ratio: 1632 / 659;
+  background: #2c3326;
+}
+
+.page-ofof .ttj-hero--ofof img {
+  object-fit: contain;
+  object-position: center;
+}
+
+.page-wcag .wcag-sponsors,
+.page-wcag .ttj-sponsors--row.wcag-sponsors {
+  background: transparent;
+  justify-content: flex-start;
+}
+
+.page-wcag .wcag-sponsors .wcag-logo,
+.page-wcag .wcag-sponsors .kyr-logo {
+  flex: 0 1 320px;
+  max-width: min(482px, 55vw);
+}
+
+.page-wcag .ttj-sponsors--row.wcag-sponsors img,
+html[data-theme="light"] .page-wcag .ttj-sponsors--row.wcag-sponsors img,
+html[data-theme="dark"] .page-wcag .ttj-sponsors--row.wcag-sponsors img {
+  flex: none;
+  width: 100%;
+  height: auto;
+  max-height: clamp(72px, 12vw, 140px);
+  object-fit: contain;
+  object-position: center;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+.page-wcag .wcag-sponsors .kyr-logo__on-light {
+  display: none !important;
+}
+
+html[data-theme="light"] .page-wcag .wcag-sponsors .kyr-logo__on-dark {
+  display: none !important;
+}
+
+html[data-theme="light"] .page-wcag .wcag-sponsors .kyr-logo__on-light {
+  display: block !important;
+}
+
+.page-wcag .ttj-person__name {
+  margin: 0;
+  color: var(--text);
+  font-weight: 600;
+  font-size: clamp(15px, 0.95rem + 0.2vw, 20px);
+}
+
+/*
+  Team sits in the intro’s right column — collapse group + supervisor as soon as
+  that pane is too narrow (auto-fit), not only at a late viewport breakpoint.
+*/
+.page-wcag .ttj-intro__team {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+}
+
+.page-wcag .ttj-intro__team > .ttj-intro__group,
+.page-wcag .ttj-intro__team > .wcag-other-groups {
+  min-width: 0;
+}
+
+.page-wcag .ttj-person > div {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.page-wcag .ttj-person a,
+.page-wcag .ttj-person__name {
+  font-size: clamp(15px, 0.95rem + 0.2vw, 20px);
+}
+
+.page-wcag .ttj-person a,
+.page-wcag .ttj-person__name,
+.page-wcag .ttj-person p {
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+}
+
+/* WCAG team: Other participants accordion (default closed) */
+.page-wcag .wcag-other-groups {
+  grid-column: 1 / -1;
+  border: 1px solid var(--line-soft);
+  border-radius: 12px;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.page-wcag .wcag-other-groups__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  margin: 0;
+  padding: 16px 18px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.page-wcag .wcag-other-groups__toggle:focus-visible {
+  outline: 3px solid var(--focus-control);
+  outline-offset: -3px;
+}
+
+.page-wcag .wcag-other-groups__icon {
+  flex-shrink: 0;
+  width: 0.55em;
+  height: 0.55em;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.page-wcag .wcag-other-groups__toggle[aria-expanded="true"] .wcag-other-groups__icon {
+  transform: rotate(-135deg);
+}
+
+.page-wcag .wcag-other-groups__panel {
+  padding: 0 18px 18px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.page-wcag .wcag-other-groups__panel[hidden] {
+  display: none;
+}
+
+.page-wcag .wcag-other-groups__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 20px;
+  padding-top: 18px;
+}
+
+.page-wcag .ttj-intro__copy a {
+  color: #68a7db;
+  text-decoration: underline;
+}
+
+.page-wcag .wcag-finished {
+  width: 100%;
+  margin-top: clamp(36px, 5vw, 64px);
+  margin-bottom: clamp(24px, 4vw, 48px);
+}
+
+/* Our Fjord final result (gigamap image) — after intro, same slot as WCAG PDF */
+.page-ofof .ofof-finished {
+  width: 100%;
+  margin-top: clamp(36px, 5vw, 64px);
+  margin-bottom: clamp(24px, 4vw, 48px);
+}
+
+.page-ofof .ofof-finished .kyr-stack__img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/*
+  Team pane is narrow beside intro copy — avoid a 3-up squeeze.
+  Participants + Supervisors share row 1; Collaborators spans full width below
+  so longer names/roles can breathe.
+*/
+.page-ofof .ttj-intro__team {
+  grid-template-columns: 1fr 1fr;
+  column-gap: 28px;
+  row-gap: 28px;
+}
+
+.page-ofof .ttj-intro__team > .ttj-intro__group {
+  min-width: 0;
+}
+
+.page-ofof .ttj-intro__team > .ttj-intro__group:nth-child(3) {
+  grid-column: 1 / -1;
+}
+
+/* Phone: stack groups in rows; let long names use full width */
+@media (max-width: 900px) {
+  .page-ofof .ttj-intro__team {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .page-ofof .ttj-intro__team > .ttj-intro__group:nth-child(3) {
+    grid-column: auto;
+  }
+
+  .page-ofof .ttj-person {
+    gap: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+  }
+
+  .page-ofof .ttj-person a,
+  .page-ofof .ttj-person__name {
+    font-size: 18px;
+    line-height: 1.25;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: normal;
+  }
+
+  .page-ofof .ttj-person p {
+    font-size: 14px;
+    line-height: 1.35;
+  }
+}
+
+.page-ofof .ttj-person > div {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.page-ofof .ttj-org {
+  margin: 0 0 12px;
+  font-size: clamp(12px, 1.2vw, 14px);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.page-ofof .ttj-person + .ttj-org {
+  margin-top: 4px;
+}
+
+/* Names are often <p class="ttj-person__name"> — beat .ttj-person p italic/light role styles */
+.page-ofof .ttj-person a,
+.page-ofof .ttj-person__name {
+  margin: 0;
+  color: var(--text);
+  font-style: normal;
+  font-weight: 600;
+  font-size: clamp(15px, 0.95rem + 0.2vw, 20px);
+  font-family: inherit;
+}
+
+.page-ofof .ttj-person a,
+.page-ofof .ttj-person__name,
+.page-ofof .ttj-person p {
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+}
+
+/* Our Fjord partner logos — same row pattern as KYR/Rema/WCAG */
+.page-ofof .ofof-sponsors,
+.page-ofof .ttj-sponsors--row.ofof-sponsors {
+  background: transparent;
+}
+
+.page-ofof .ofof-sponsors .ofof-logo,
+.page-ofof .ofof-sponsors .kyr-logo {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  color: var(--text);
+  background: transparent;
+}
+
+.page-ofof .ofof-sponsors .kyr-logo img,
+.page-ofof .ttj-sponsors--row.ofof-sponsors img,
+html[data-theme="light"] .page-ofof .ttj-sponsors--row.ofof-sponsors img,
+html[data-theme="dark"] .page-ofof .ttj-sponsors--row.ofof-sponsors img {
+  flex: none;
+  width: 100%;
+  height: auto;
+  max-height: clamp(72px, 12vw, 140px);
+  object-fit: contain;
+  object-position: center;
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  box-sizing: border-box;
+}
+
+.page-ofof .ofof-sponsors .kyr-logo img:not([src]),
+.page-ofof .ofof-sponsors .kyr-logo img[src=""] {
+  visibility: hidden;
+}
+
+.page-ofof .ofof-sponsors .kyr-logo__on-light {
+  display: none !important;
+}
+
+html[data-theme="light"] .page-ofof .ofof-sponsors .kyr-logo__on-dark {
+  display: none !important;
+}
+
+html[data-theme="light"] .page-ofof .ofof-sponsors .kyr-logo__on-light {
+  display: block !important;
+}
+
+html[data-theme="dark"] .page-ofof .ofof-sponsors .kyr-logo__on-dark {
+  display: block !important;
+}
+
+@media (max-width: 700px) {
+  .page-ofof .ofof-sponsors .kyr-logo {
+    flex: 1 1 calc(50% - 12px);
+  }
+}
+
+.page-wcag .wcag-finished img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+
+.page-wcag .wcag-pdf-frame {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #111;
+  border: 1px solid var(--line-strong);
+}
+
+.page-wcag .wcag-pdf-frame__embed {
+  display: block;
+  width: 100%;
+  height: min(82vh, 1200px);
+  border: 0;
+  background: #111;
+}
+
+.page-wcag .wcag-challenge-media {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+  align-self: start;
+}
+
+/* Portrait legal-pad cartoon — box hugs artwork (no landscape empty frame) */
+.page-wcag .wcag-challenge__visual {
+  aspect-ratio: auto;
+  max-width: none;
+  width: 100%;
+  height: auto;
+  background: #f5e6a3;
+}
+
+.page-wcag .wcag-challenge__visual img {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  object-position: center top;
+  display: block;
+  border-radius: 15px;
+}
+
+.page-wcag .wcag-resource-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@media (max-width: 1100px) {
+  .page-wcag .wcag-challenge__visual {
+    max-width: min(420px, 100%);
+    margin-inline: auto;
+  }
+
+  .page-wcag .wcag-resource-btns {
+    justify-content: center;
+  }
+}
+
+.page-wcag .wcag-pdf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.page-wcag .wcag-resource-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 22px;
+  border-radius: 8px;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 16px;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.page-wcag .wcag-resource-btn:hover {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+
+.page-wcag .wcag-resource-btn:focus-visible {
+  outline: 2px solid #ff5100;
+  outline-offset: 3px;
+}
+
+.page-rema .rema-sponsors,
+.page-rema .ttj-sponsors--row.rema-sponsors {
+  background: transparent;
+  justify-content: flex-start;
+}
+
+.page-rema .rema-sponsors .rema-logo,
+.page-rema .rema-sponsors .kyr-logo {
+  flex: 0 1 320px;
+  max-width: min(482px, 55vw);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  background: transparent;
+}
+
+.page-rema .rema-sponsors .kyr-logo img {
+  width: 100%;
+  height: auto;
+  max-height: clamp(72px, 12vw, 140px);
+  object-fit: contain;
+  object-position: left center;
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+.page-rema .rema-sponsors .kyr-logo__on-light {
+  display: none !important;
+}
+
+html[data-theme="light"] .page-rema .rema-sponsors .kyr-logo__on-dark {
+  display: none !important;
+}
+
+html[data-theme="light"] .page-rema .rema-sponsors .kyr-logo__on-light {
+  display: block !important;
+}
+
+html[data-theme="dark"] .page-rema .rema-sponsors .kyr-logo__on-dark {
+  display: block !important;
+}
+
+.page-rema .ttj-challenge__copy--solo {
+  max-width: 52rem;
+}
+
+.page-rema .ttj-challenge__media {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  max-width: 850px;
+}
+
+.page-rema .ttj-challenge__media .ttj-challenge__visual {
+  max-width: none;
+}
+
+.page-rema .ttj-challenge__laws-note {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.35em 0.45em;
+  font-size: clamp(14px, 1.4vw, 17px);
+  line-height: 1.45;
+}
+
+.page-rema .ttj-challenge__laws-hint {
+  margin: 0.45em 0 0;
+  font-size: clamp(12px, 1.15vw, 14px);
+  line-height: 1.4;
+  opacity: 0.62;
+}
+
+.page-rema .ttj-challenge__laws-link {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: inherit;
+  opacity: 0.72;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.page-rema .ttj-challenge__laws-link:hover,
+.page-rema .ttj-challenge__laws-link:focus-visible {
+  opacity: 1;
+}
+
+@media (max-width: 1100px) {
+  .page-rema .ttj-challenge__media {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+}
+
+.page-rema #result .kyr-stack {
+  margin-bottom: clamp(36px, 5vw, 64px);
+}
+
+.ttj-sponsors--row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(16px, 3vw, 48px);
+  width: 100%;
+  max-width: none;
+  margin-top: 40px;
+  box-sizing: border-box;
+  background: transparent;
+}
+
+/*
+  Know Your Rights partner logos
+  - One theme pair per partner in the DOM; hide the inactive via html[data-theme]
+  - No black logo cards: assets are transparent and sit on page --bg
+  - Overrides any legacy .ttj-sponsors--row img { background:#000 } light-mode treatment
+*/
+.page-kyr .kyr-sponsors,
+.page-kyr .ttj-sponsors--row.kyr-sponsors {
+  background: transparent;
+}
+
+.page-kyr .kyr-sponsors .kyr-logo {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  color: var(--text);
+  background: transparent;
+}
+
+.page-kyr .kyr-sponsors .kyr-logo img,
+.page-kyr .ttj-sponsors--row.kyr-sponsors img,
+html[data-theme="light"] .page-kyr .ttj-sponsors--row.kyr-sponsors img,
+html[data-theme="dark"] .page-kyr .ttj-sponsors--row.kyr-sponsors img {
+  flex: none;
+  width: 100%;
+  height: auto;
+  max-height: clamp(72px, 12vw, 140px);
+  object-fit: contain;
+  object-position: center;
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  box-sizing: border-box;
+}
+
+/* Hide broken/missing src until kyr-assets.js assigns Vite URLs */
+.page-kyr .kyr-sponsors .kyr-logo img:not([src]),
+.page-kyr .kyr-sponsors .kyr-logo img[src=""] {
+  visibility: hidden;
+}
+
+/* EGGS wordmark reads a bit denser — give it slightly less width budget */
+.page-kyr .kyr-sponsors .kyr-logo--eggs {
+  flex: 0.85 1 0;
+}
+
+/* Show dark-theme assets by default; swap on light — !important beats .ttj-sponsors img */
+.page-kyr .kyr-sponsors .kyr-logo__on-light {
+  display: none !important;
+}
+
+html[data-theme="light"] .page-kyr .kyr-sponsors .kyr-logo__on-dark {
+  display: none !important;
+}
+
+html[data-theme="light"] .page-kyr .kyr-sponsors .kyr-logo__on-light {
+  display: block !important;
+}
+
+html[data-theme="dark"] .page-kyr .kyr-sponsors .kyr-logo__on-dark {
+  display: block !important;
+}
+
+@media (max-width: 700px) {
+  .ttj-sponsors--row {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .page-kyr .kyr-sponsors .kyr-logo {
+    flex: 1 1 40%;
+    max-width: 45%;
+  }
+
+  .page-kyr .kyr-sponsors .kyr-logo img {
+    max-height: 96px;
+  }
+}
+
+
+/* Know Your rights — deliverables art fills the challenge frame */
+.ttj-challenge__visual--fill {
+  aspect-ratio: 16 / 9;
+  background: #050b18;
+}
+
+.ttj-challenge__visual--fill img {
+  object-fit: cover;
+  object-position: center;
+  border-radius: 0;
+}
+
+/* --------------------------------------------------
+   Content image watermark — black tiger mark, bottom-left
+   Opacity ~0.22; not used on covers / nav / avatars / PDF
+   -------------------------------------------------- */
+.cs-wm {
+  position: relative;
+}
+
+.cs-wm::after {
+  content: "";
+  position: absolute;
+  left: clamp(10px, 1.6vw, 18px);
+  bottom: clamp(10px, 1.6vw, 18px);
+  width: clamp(28px, 4.5vw, 48px);
+  aspect-ratio: 1;
+  background: url("/images/watermark-logo.svg?v=wm5") center / contain no-repeat;
+  opacity: 0.22;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Wrappers around bare content <img>s (wires, photos, full-bleed) */
+.cs-wm--wrap {
+  display: block;
+  max-width: 100%;
+}
+
+.cs-wm--wrap > img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.ttj-wires > .cs-wm--wrap {
+  width: min(18%, 295px);
+  min-width: min(110px, 28vw);
+  max-width: 100%;
+  flex: 1 1 110px;
+}
+
+.ttj-wires > .cs-wm--wrap > img {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  flex: none;
+}
+
+.ttj-phones__panel > .cs-wm--wrap {
+  width: min(45%, 353px);
+  max-width: 100%;
+  flex: 0 1 auto;
+}
+
+.ttj-phones__panel > .cs-wm--wrap > img {
+  width: 100%;
+  max-width: none;
+}
+
+.ttj-photos > .cs-wm--wrap {
+  border-radius: clamp(12px, 2vw, 20px);
+  overflow: hidden;
+}
+
+.cs-wm--wrap:has(> .ttj-full) {
+  margin: 0 0 28px;
+}
+
+.cs-wm--wrap > .ttj-full {
+  margin: 0;
+}
+
+.kyr-stack__item.cs-wm {
+  overflow: hidden;
+  border-radius: clamp(12px, 2vw, 20px);
+}
+
+.kyr-stack__item.cs-wm .kyr-stack__img {
+  border-radius: 0;
+}
+
+.ttj-hero.cs-wm,
+.ttj-analysis__frame.cs-wm,
+.ttj-carousel__frame.cs-wm,
+.ttj-challenge__visual.cs-wm,
+.wcag-challenge__visual.cs-wm,
+.ttj-note-photo.cs-wm,
+.ttj-retro.cs-wm,
+.kyr-result-side.cs-wm,
+.kyr-journey__frame.cs-wm {
+  /* ensure positioning context even if layout rules omit it */
+  position: relative;
+}

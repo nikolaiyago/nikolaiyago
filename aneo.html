@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>document.documentElement.setAttribute("data-theme",localStorage.getItem("portfolio-theme")||"dark");</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/images/logo.png?v=logo6" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=logo6" />
+    <title>ANEO — Nikolai Yago Conde</title>
+
+    <!--
+      Prefer local copies in /images/ttj/ when present (instant).
+      Until you run: bash scripts/download-ttj-images.sh
+      the page falls back to Figma CDN URLs below via js/ttj-images.js
+    -->
+    <link rel="preload" as="image" href="/images/ttj/hero.jpg" fetchpriority="high" />
+    <link rel="preload" as="image" href="https://www.figma.com/api/mcp/asset/44506d4b-dee8-4a9b-a953-786dd624204d" fetchpriority="high" />
+    <link rel="preload" as="image" href="https://www.figma.com/api/mcp/asset/69c1fe14-9db7-47bf-920e-7bd329a1533b" />
+    <link rel="preload" as="image" href="/images/ttj/retro-notes.jpg?v=ttjretro1" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://www.figma.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/base.css?v=projnav3" />
+    <link rel="stylesheet" href="/css/tap-to-join.css?v=phonetop4" />
+  </head>
+  <body>
+    <!--
+      ============================================
+      TAP TO JOIN — case study detail
+      ============================================
+      Long-scroll page (not snap). Sections 00–05 + demo video + next project.
+      Images: data-local preferred, data-remote = Figma CDN fallback (ttj-images.js).
+      Shared chrome: logo nav + top-right utils.
+      Scripts: ttj-images → translations → i18n → theme → presence → site-nav → keyboard → tap-to-join
+    -->
+
+    <nav class="site-nav site-nav--project" aria-label="Primary">
+      <div class="site-nav__shell">
+                <span class="site-nav__logo" aria-hidden="true">
+          <img
+            src="/images/logo.svg?v=logo7"
+            alt=""
+            width="80"
+            height="80"
+          />
+        </span>
+        <div class="site-nav__mouth">
+          <div class="site-nav__menu">
+            <a class="site-nav__link" data-nav="me" href="/index.html" data-i18n="nav.me">Me</a>
+            <a class="site-nav__link" data-nav="cases" href="/case-studies.html" aria-label="Case Studies"><span class="site-nav__link-line">Case</span><span class="site-nav__link-line">Studies</span></a>
+            <a class="site-nav__link" data-nav="collection" href="/collection.html" data-i18n="nav.collection">Collection</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!--
+      Top-right utilities
+      Desktop: language · live visitors · theme in a row
+      Phone: top-left tiger + orange utils row (lang | theme | live | mail)
+    -->
+    <div class="site-utils" aria-label="Site utilities">
+      <button
+        type="button"
+        class="site-utils__menu-btn"
+        data-utils-open
+        aria-expanded="false"
+        aria-controls="site-utils-panel"
+        data-i18n-attr="aria-label:utils.menu"
+      >
+        <span class="site-utils__menu-icon" aria-hidden="true"></span>
+      </button>
+
+      <div class="site-utils__panel" id="site-utils-panel">
+        <button
+          type="button"
+          class="site-utils__close"
+          data-utils-close
+          data-i18n-attr="aria-label:utils.close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+
+        <div class="site-utils__langs" role="group" data-i18n-attr="aria-label:utils.lang">
+          <button type="button" class="site-utils__lang" data-lang="NO">NO</button>
+          <button type="button" class="site-utils__lang" data-lang="ENG">ENG</button>
+          <button type="button" class="site-utils__lang" data-lang="ESP">ESP</button>
+        </div>
+
+        <button type="button" class="site-utils__theme" data-theme-toggle aria-label="Theme">
+          <span class="site-utils__theme-icon" aria-hidden="true"></span>
+          <span data-theme-label data-i18n="utils.dark">Dark</span>
+        </button>
+
+        <!-- Mail: phone utils grid cell; desktop fixed FAB (position:fixed escapes panel) -->
+        <button
+          type="button"
+          class="home-mail"
+          id="copy-email"
+          data-email="nikolaiconde@gmail.com"
+          data-i18n-attr="aria-label:home.email"
+        >
+          <span class="home-mail__label" aria-live="polite">
+            <svg class="home-mail__copy-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="8" y="8" width="12" height="12" rx="2.5" stroke="currentColor" stroke-width="2" />
+              <path
+                d="M6 14.5V6.5A2.5 2.5 0 0 1 8.5 4H16"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            <span data-i18n="home.email_copied">Email Copied</span>
+          </span>
+          <span class="home-mail__icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="2" />
+              <path
+                d="M4 7.5 12 13l8-5.5"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+
+
+    <div class="ttj">
+      <section class="ttj-hero-wrap" data-section id="hero">
+        <div class="ttj-hero">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E"
+            class="ttj-img"
+            data-local="/images/aneo/placeholder.png"
+            data-remote=""
+            alt="ANEO hero"
+            width="1728"
+            height="728"
+            fetchpriority="high"
+            decoding="sync"
+          />
+        </div>
+        <header class="ttj-header">
+          <h1>“ANEO”</h1>
+          <p class="ttj-header__subtitle" data-i18n="aneo.subtitle">Interaction design - Sustainability &amp; environment / June 2026</p>
+          <div class="ttj-tags">
+            <span class="ttj-tags__label" data-i18n="aneo.tags">Tags:</span>
+            <span class="ttj-tag" data-i18n="aneo.tag_systems">Systems mapping</span>
+            <span class="ttj-tag" data-i18n="aneo.tag_strategic">Strategic design</span>
+            <span class="ttj-tag" data-i18n="aneo.tag_business">Business design</span>
+            <span class="ttj-tag" data-i18n="aneo.tag_research">Analysing</span>
+            <span class="ttj-tag" data-i18n="aneo.tag_proto">Psychology</span>
+          </div>
+          <p class="ttj-duration">
+            <span class="ttj-duration__label" data-i18n="aneo.duration_label">Duration:</span>
+            <span class="ttj-duration__value" data-i18n="aneo.duration">—</span>
+          </p>
+        </header>
+      </section>
+
+      <section class="ttj-intro ttj-block" data-section id="intro">
+        <div class="ttj-intro__copy">
+          <p data-i18n="aneo.intro_p1">
+            Spotify built a way to listen together. Almost no one uses it, and the few who
+            find it are faced with some challenges.
+          </p>
+          <p data-i18n="aneo.intro_p2">
+            The task was to take one feature of a music streaming app, find a real gap, and
+            design a focused improvement we could back up with evidence. We picked Jam,
+            Spotify's collaborative listening feature, and went after the part that breaks
+            first: getting people into a session. We audited how the major apps handle shared
+            listening, interviewed people about how they actually listen together, prototyped
+            a simpler way to start and join a Jam, and tested it with real users. Along the
+            way we learned that the hard problem wasn't the listening — it was everything that
+            happens before the music starts.
+          </p>
+        </div>
+        <div class="ttj-intro__team">
+          <div class="ttj-intro__group">
+            <h2 data-i18n="aneo.designers">Designers</h2>
+            <div class="ttj-person">
+              <img
+                class="ttj-img"
+                src="/images/me/nikolai-yago-conde.png?v=portrait3"
+                data-local="/images/me/nikolai-yago-conde.png?v=portrait3"
+                data-me-person="nikolai"
+                alt="Nikolai Yago Conde"
+                width="60"
+                height="60"
+              />
+              <div>
+                <a href="https://www.linkedin.com/in/nikolai-yago-conde-3231773b3/" target="_blank" rel="noreferrer">Nikolai Yago Conde</a>
+                <p data-i18n="aneo.role_student">Interaction designer Student</p>
+              </div>
+            </div>
+            <div class="ttj-person">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E" class="ttj-img" data-local="/images/aneo/placeholder.png" data-remote="" alt="" width="60" height="60" />
+              <div>
+                <a href="https://www.linkedin.com/in/serafin-kjensli-05b462403/" target="_blank" rel="noreferrer">Serafin Kjensli</a>
+                <p data-i18n="aneo.role_student">Interaction designer Student</p>
+              </div>
+            </div>
+            <div class="ttj-person">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E" class="ttj-img" data-local="/images/aneo/placeholder.png" data-remote="" alt="" width="60" height="60" />
+              <div>
+                <a href="https://www.linkedin.com/in/isak-patrick-hembery-4aa739293/" target="_blank" rel="noreferrer">Isak Patrick Hembery</a>
+                <p data-i18n="aneo.role_student">Interaction designer Student</p>
+              </div>
+            </div>
+          </div>
+          <div class="ttj-intro__group">
+            <h2 data-i18n="aneo.supervisor">Supervisor</h2>
+            <div class="ttj-person">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E" class="ttj-img" data-local="/images/aneo/placeholder.png" data-remote="" alt="" width="60" height="60" />
+              <div>
+                <a href="https://www.linkedin.com/in/movito/" target="_blank" rel="noreferrer">Fredrik Matheson</a>
+                <p data-i18n="aneo.role_tutor">Tutor</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ttj-sponsors">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E" class="ttj-img" data-local="/images/aneo/placeholder.png" data-remote="" alt="Spotify" width="482" height="194" />
+        </div>
+      </section>
+
+      <section class="ttj-section ttj-block" data-section id="demo">
+        <div class="ttj-video ttj-video--hero">
+          <video
+            controls
+            playsinline
+            muted
+            preload="metadata"
+            aria-label="ANEO recording"
+          >
+            <source src="" type="video/mp4" />
+          </video>
+        </div>
+      </section>
+
+      <section class="ttj-section ttj-block" data-section id="challenge">
+        <h2 class="ttj-section__heading"><span class="ttj-section__number">00</span> <span data-i18n="aneo.s00">Challenge &amp; my role</span></h2>
+        <div class="ttj-challenge">
+          <div class="ttj-challenge__visual">
+            <img
+              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E"
+              alt="Join the Jam illustration"
+              width="1529"
+              height="1080"
+            />
+          </div>
+          <div class="ttj-challenge__copy">
+            <h3 data-i18n="aneo.challenge_h">Challenge</h3>
+            <p data-i18n="aneo.challenge_p">
+              The brief was to pick a single feature area within music streaming, map what
+              already exists, identify an underserved need, and design a focused solution,
+              backed by research and tested with real users.
+            </p>
+            <h3 data-i18n="aneo.role_h">My role</h3>
+            <p data-i18n="aneo.role_p1">
+              Part of a team of three. We shared the analysis phase, each mapping different
+              music streaming platforms before aligning on our findings. Together we chose to
+              focus on music listening in social settings, inspired by our own experiences with
+              Spotify Jam.
+            </p>
+            <p data-i18n="aneo.role_p2">
+              My specific contribution was conducting interviews, drawing and documenting our
+              process, and making sure our conversations and decisions were captured on paper
+              so nothing was lost between sessions.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="ttj-section ttj-block" data-section id="analysis">
+        <h2 class="ttj-section__heading"><span class="ttj-section__number">01</span> <span data-i18n="aneo.s01">Analysis</span></h2>
+        <p class="ttj-section__text ttj-analysis__caption" id="analysis-caption" data-i18n="aneo.a1">
+          We each mapped different music streaming platforms and shared our findings.
+          It quickly became clear we needed to narrow down...
+        </p>
+        <div class="ttj-analysis">
+          <div class="ttj-analysis__frame">
+            <img
+              id="analysis-image"
+              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E"
+              alt="Analysis board 1 of 5"
+              width="1680"
+              height="900"
+            />
+          </div>
+          <div class="ttj-analysis__bar">
+            <button type="button" class="ttj-analysis__btn" id="analysis-prev" data-i18n-attr="aria-label:aneo.prev">‹</button>
+            <div
+              class="ttj-analysis__track"
+              role="progressbar"
+              aria-valuemin="1"
+              aria-valuemax="5"
+              aria-valuenow="1"
+              data-i18n-attr="aria-label:aneo.progress"
+              id="analysis-progress"
+            >
+              <div class="ttj-analysis__fill" id="analysis-progress-fill"></div>
+            </div>
+            <button type="button" class="ttj-analysis__btn" id="analysis-next" data-i18n-attr="aria-label:aneo.next_aria">›</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="ttj-section ttj-block" data-section id="design">
+        <h2 class="ttj-section__heading"><span class="ttj-section__number">02</span> <span data-i18n="aneo.s02">Design</span></h2>
+        <p class="ttj-section__text" data-i18n="aneo.design_p">
+          In the design phase we fell into a fidelity trap while exploring the social hub
+          side of Spotify Jam.
+        </p>
+        <div class="ttj-phones">
+          <div class="ttj-phones__panel">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E" class="ttj-img" data-local="/images/aneo/placeholder.png" data-remote="" alt="" width="353" height="765" />
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E" class="ttj-img" data-local="/images/aneo/placeholder.png" data-remote="" alt="" width="352" height="764" />
+          </div>
+          <div class="ttj-phones__panel">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E" class="ttj-img" data-local="/images/aneo/placeholder.png" data-remote="" alt="" width="351" height="761" />
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E" class="ttj-img" data-local="/images/aneo/placeholder.png" data-remote="" alt="" width="351" height="761" />
+          </div>
+        </div>
+        <div class="ttj-wires">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E" class="ttj-img" data-local="/images/aneo/placeholder.png" data-remote="" alt="" width="294" height="638" />
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E" class="ttj-img" data-local="/images/aneo/placeholder.png" data-remote="" alt="" width="294" height="638" />
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E" class="ttj-img" data-local="/images/aneo/placeholder.png" data-remote="" alt="" width="295" height="638" />
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E" class="ttj-img" data-local="/images/aneo/placeholder.png" data-remote="" alt="" width="295" height="638" />
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E" class="ttj-img" data-local="/images/aneo/placeholder.png" data-remote="" alt="" width="294" height="636" />
+        </div>
+      </section>
+
+      <section class="ttj-section ttj-block" data-section id="prototype">
+        <h2 class="ttj-section__heading"><span class="ttj-section__number">03</span> <span data-i18n="aneo.s03">Prototype &amp; testing</span></h2>
+        <p class="ttj-section__text" data-i18n="aneo.proto_p">
+          To handle the fidelity trap, we decided that instead of focusing on a social setting
+          which is too broad we scoped it down to a car trip, and focused on a single feature.
+        </p>
+        <img
+          class="ttj-full ttj-full--story"
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E"
+          alt="Car trip Jam comic storyboard"
+          width="1674"
+          height="1494"
+        />
+        <img
+          class="ttj-full"
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E"
+          alt="Three ideas: NFC tap, Spotify Friends, and QR code"
+          width="840"
+          height="450"
+        />
+        <div class="ttj-photos">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E" alt="Paper prototype testing" width="800" height="800" />
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E" alt="Collaborative paper prototyping" width="800" height="800" />
+        </div>
+        <div class="ttj-note-photo">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E" alt="User testing feedback notes rounds 1–3" width="875" height="752" />
+        </div>
+        <div class="ttj-photos ttj-photos--session">
+          <img
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E"
+            alt="User testing My Jam on two phones"
+            width="768"
+            height="1024"
+          />
+          <img
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E"
+            alt="Finger tapping My Jam controls during prototype testing"
+            width="768"
+            height="1024"
+          />
+        </div>
+        <div class="ttj-note-photo">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E" alt="Testing prototype notes with Arin and Fabian" width="875" height="752" />
+        </div>
+      </section>
+
+      <section class="ttj-section ttj-block" data-section id="result">
+        <h2 class="ttj-section__heading"><span class="ttj-section__number">04</span> <span data-i18n="aneo.s04">Result</span></h2>
+        <div class="ttj-result">
+          <div>
+            <h3 data-i18n="aneo.process">Process</h3>
+            <ul>
+              <li data-i18n="aneo.process_1">Fell in the figma fidelity trap</li>
+              <li data-i18n="aneo.process_2">Was really helpful to focus down on a specific scenario</li>
+              <li data-i18n="aneo.process_3">Helped a lot to go back to paper prototypes</li>
+            </ul>
+          </div>
+          <div>
+            <h3 data-i18n="aneo.concept">Concept</h3>
+            <ul>
+              <li data-i18n="aneo.concept_1">Focused on initiating Jam — the first hinder people meet</li>
+              <li data-i18n="aneo.concept_2">Would like to explore car screens and what happens after a jam</li>
+            </ul>
+          </div>
+        </div>
+        <!--
+          Result phones:
+          Desktop → HOST | video | video | Guest (labels outside, vertical)
+          Phone   → HOST above first video, Guest above second (centered)
+        -->
+        <div class="ttj-video-row">
+          <p class="ttj-devices__label ttj-devices__label--host" data-i18n="aneo.host">HOST</p>
+          <figure class="ttj-video ttj-video--device ttj-video--device-host">
+            <video controls playsinline muted preload="metadata" aria-label="ANEO recording">
+              <source src="" type="video/mp4" />
+            </video>
+          </figure>
+          <figure class="ttj-video ttj-video--device ttj-video--device-guest">
+            <video controls playsinline muted preload="metadata" aria-label="ANEO recording">
+              <source src="" type="video/mp4" />
+            </video>
+          </figure>
+          <p class="ttj-devices__label ttj-devices__label--guest" data-i18n="aneo.guest">Guest</p>
+        </div>
+      </section>
+
+      <section class="ttj-section ttj-block" data-section id="retrospective">
+        <h2 class="ttj-section__heading"><span class="ttj-section__number">05</span> <span data-i18n="aneo.s05">Retrospective</span></h2>
+        <!-- Figma notebook: 1572 × 1120 -->
+        <div class="ttj-retro ttj-retro--blurred" id="retro">
+          <img
+            class="ttj-img"
+            src="/images/ttj/retro-notes.jpg?v=ttjretro1"
+            data-local="/images/ttj/retro-notes.jpg?v=ttjretro1"
+            alt="Process notebook"
+            width="1572"
+            height="1120"
+          />
+          <form class="ttj-retro__unlock" id="unlock-form">
+            <p data-i18n="aneo.unlock">Enter the 6-digit code to view the full process</p>
+            <input id="unlock-code" type="text" inputmode="numeric" maxlength="6" placeholder="••••••" aria-label="Unlock code" />
+            <button type="submit" data-i18n="aneo.unlock_btn">Unlock</button>
+            <span id="unlock-error" hidden data-i18n="aneo.unlock_err">Incorrect code</span>
+          </form>
+        </div>
+        <p class="ttj-section__text" data-i18n="aneo.retro_p">
+          If you have received my visit card, there is a code written that will give you access
+          to view my documented process on paper. I sketch to have a database that allows me to
+          extract previous info and make better planning in the future.
+        </p>
+      </section>
+
+      <section
+        class="ttj-next"
+        data-section
+        id="next"
+        style="background:#ff5100;color:#111;width:100%;margin:80px 0 0;padding:64px 0 100px;box-sizing:border-box;border-radius:28px 28px 0 0;"
+      >
+        <h2 data-i18n="aneo.next">Next project</h2>
+        <a class="ttj-next__card" href="/know-your-rights.html">
+          <div class="ttj-next__visual">
+            <img
+              src="/images/covers/know-your-rights.png"
+              alt=""
+              width="1024"
+              height="1024"
+            />
+          </div>
+          <div class="ttj-next__copy">
+            <p class="ttj-next__eyebrow">“Know Your rights”</p>
+            <p class="ttj-next__title" data-i18n="aneo.next_title">Unlock your rights.</p>
+          </div>
+        </a>
+      </section>
+    </div>
+
+    <p class="site-live-count" aria-live="polite" hidden>
+      <span data-visitor-count></span>
+      <span data-i18n="utils.visiting">visiting</span>
+    </p>
+
+    <script src="/js/case-study-images.js?v=me1"></script>
+    <script src="/js/translations.js?v=devices1"></script>
+    <script src="/js/i18n.js?v=phonetop4"></script>
+    <script src="/js/theme.js"></script>
+    <script src="/js/site-utils.js?v=phonetop4"></script>
+    <script src="/js/site-mail.js?v=phonetop4"></script>
+    <script src="/js/presence.js?v=livecount2"></script>
+    <script src="/js/site-nav.js?v=mouthfix2"></script>
+    <script src="/js/keyboard-nav.js?v=stops2"></script>
+    <script type="module" src="/js/me-assets.js?v=portrait3"></script>
+    <script src="/js/watermark.js?v=wm5"></script>
+    <script src="/js/case-study.js?v=unlock190670"></script>
+    <script src="/js/content-guard.js?v=6"></script>
+  </body>
+</html>

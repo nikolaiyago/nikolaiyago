@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>document.documentElement.setAttribute("data-theme",localStorage.getItem("portfolio-theme")||"dark");</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/images/logo.png?v=logo6" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=logo6" />
+    <title>Know Your rights — Nikolai Yago Conde</title>
+
+    <!--
+      Prefer local copies in /images/ttj/ when present (instant).
+      Until you run: bash scripts/download-ttj-images.sh
+      the page falls back to Figma CDN URLs below via js/ttj-images.js
+    -->
+<link rel="preload" as="image" href="https://www.figma.com/api/mcp/asset/44506d4b-dee8-4a9b-a953-786dd624204d" fetchpriority="high" />
+    <link rel="preload" as="image" href="https://www.figma.com/api/mcp/asset/69c1fe14-9db7-47bf-920e-7bd329a1533b" />
+    <link rel="preload" as="image" href="/images/kyr/retro-notes.jpg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://www.figma.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/base.css?v=projnav3" />
+    <link rel="stylesheet" href="/css/tap-to-join.css?v=phonetop4" />
+  </head>
+  <body class="page-kyr">
+    <!--
+      ============================================
+      TAP TO JOIN — case study detail
+      ============================================
+      Long-scroll page (not snap). Sections 00–05 + demo video + next project.
+      Images: data-local preferred, data-remote = Figma CDN fallback (ttj-images.js).
+      Shared chrome: logo nav + top-right utils.
+      Scripts: ttj-images → translations → i18n → theme → presence → site-nav → keyboard → tap-to-join
+    -->
+
+    <nav class="site-nav site-nav--project" aria-label="Primary">
+      <div class="site-nav__shell">
+                <span class="site-nav__logo" aria-hidden="true">
+          <img
+            src="/images/logo.svg?v=logo7"
+            alt=""
+            width="80"
+            height="80"
+          />
+        </span>
+        <div class="site-nav__mouth">
+          <div class="site-nav__menu">
+            <a class="site-nav__link" data-nav="me" href="/index.html" data-i18n="nav.me">Me</a>
+            <a class="site-nav__link" data-nav="cases" href="/case-studies.html" aria-label="Case Studies"><span class="site-nav__link-line">Case</span><span class="site-nav__link-line">Studies</span></a>
+            <a class="site-nav__link" data-nav="collection" href="/collection.html" data-i18n="nav.collection">Collection</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!--
+      Top-right utilities
+      Desktop: language · live visitors · theme in a row
+      Phone: top-left tiger + orange utils row (lang | theme | live | mail)
+    -->
+    <div class="site-utils" aria-label="Site utilities">
+      <button
+        type="button"
+        class="site-utils__menu-btn"
+        data-utils-open
+        aria-expanded="false"
+        aria-controls="site-utils-panel"
+        data-i18n-attr="aria-label:utils.menu"
+      >
+        <span class="site-utils__menu-icon" aria-hidden="true"></span>
+      </button>
+
+      <div class="site-utils__panel" id="site-utils-panel">
+        <button
+          type="button"
+          class="site-utils__close"
+          data-utils-close
+          data-i18n-attr="aria-label:utils.close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+
+        <div class="site-utils__langs" role="group" data-i18n-attr="aria-label:utils.lang">
+          <button type="button" class="site-utils__lang" data-lang="NO">NO</button>
+          <button type="button" class="site-utils__lang" data-lang="ENG">ENG</button>
+          <button type="button" class="site-utils__lang" data-lang="ESP">ESP</button>
+        </div>
+
+        <button type="button" class="site-utils__theme" data-theme-toggle aria-label="Theme">
+          <span class="site-utils__theme-icon" aria-hidden="true"></span>
+          <span data-theme-label data-i18n="utils.dark">Dark</span>
+        </button>
+
+        <!-- Mail: phone utils grid cell; desktop fixed FAB (position:fixed escapes panel) -->
+        <button
+          type="button"
+          class="home-mail"
+          id="copy-email"
+          data-email="nikolaiconde@gmail.com"
+          data-i18n-attr="aria-label:home.email"
+        >
+          <span class="home-mail__label" aria-live="polite">
+            <svg class="home-mail__copy-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="8" y="8" width="12" height="12" rx="2.5" stroke="currentColor" stroke-width="2" />
+              <path
+                d="M6 14.5V6.5A2.5 2.5 0 0 1 8.5 4H16"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            <span data-i18n="home.email_copied">Email Copied</span>
+          </span>
+          <span class="home-mail__icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="2" />
+              <path
+                d="M4 7.5 12 13l8-5.5"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+
+
+    <div class="ttj">
+      <section class="ttj-hero-wrap" data-section id="hero">
+        <div class="ttj-hero ttj-hero--cover">
+          <img
+            class="ttj-img"
+            src="/images/ttj/test-pixel.png?v=kyr-banner1"
+            alt="Know Your rights — worker checking a contract for violations"
+            width="3379"
+            height="2048"
+            fetchpriority="high"
+            decoding="sync"
+          />
+        </div>
+        <header class="ttj-header">
+          <h1>“Know Your rights”</h1>
+          <p class="ttj-header__subtitle" data-i18n="kyr.subtitle">Interaction design - Civic &amp; legal / June 2026</p>
+          <div class="ttj-tags">
+            <span class="ttj-tags__label" data-i18n="kyr.tags">Tags:</span>
+            <span class="ttj-tag" data-i18n="kyr.tag_research">Analysing</span>
+            <span class="ttj-tag" data-i18n="kyr.tag_proto">Psychology</span>
+            <span class="ttj-tag" data-i18n="kyr.tag_info">Information design</span>
+            <span class="ttj-tag" data-i18n="kyr.tag_intervention">Intervention design</span>
+            <span class="ttj-tag" data-i18n="kyr.tag_story">Storytelling &amp; narrative</span>
+          </div>
+          <p class="ttj-duration">
+            <span class="ttj-duration__label" data-i18n="kyr.duration_label">Duration:</span>
+            <span class="ttj-duration__value" data-i18n="kyr.duration">5 weeks</span>
+          </p>
+        </header>
+      </section>
+
+      <section class="ttj-intro ttj-block" data-section id="intro">
+                <div class="ttj-intro__copy">
+          <p data-i18n="kyr.intro_p1">
+            Norway has some of the strongest labor laws in the world. Most of the workers they're supposed to protect have never read them — or don't know how to use them.
+          </p>
+          <p data-i18n="kyr.intro_p2">
+            School is a rare space to push boundaries, test assumptions, and fail. Sopra Steria challenged students to develop their own concept for a digital product within a short timeframe, building a rock-solid rationale for every decision, and holding both a business and a design perspective throughout. What mattered wasn't the size of the problem, but the ability to define a focused problem space, explain why it's worth solving, and translate it into a realistic solution.
+          </p>
+          <p data-i18n="kyr.intro_p3">
+            During this project I found an untapped market space with huge opportunities — one that could change the way society works.
+          </p>
+        </div>
+                                <div class="ttj-intro__team">
+          <div class="ttj-intro__group">
+            <h2 data-i18n="kyr.designers">Designer</h2>
+            <div class="ttj-person">
+              <img
+                class="ttj-img"
+                src="/images/me/nikolai-yago-conde.png?v=fix1"
+                data-local="/images/me/nikolai-yago-conde.png?v=fix1"
+                data-me-person="nikolai"
+                alt="Nikolai Yago Conde"
+                width="60"
+                height="60"
+              />
+              <div>
+                <a href="https://www.linkedin.com/in/nikolai-yago-conde-3231773b3/" target="_blank" rel="noreferrer">Nikolai Yago Conde</a>
+                <p data-i18n="kyr.role_student">Interaction designer Student</p>
+              </div>
+            </div>
+          </div>
+          <div class="ttj-intro__group">
+            <h2 data-i18n="kyr.supervisor">Supervisor</h2>
+            <div class="ttj-person">
+              <img
+                class="ttj-img"
+                src="https://www.figma.com/api/mcp/asset/a126f324-65c4-4fd1-b26a-f7a98bcd9bd3"
+                data-local="/images/kyr/person-tarjei.png"
+                data-remote="https://www.figma.com/api/mcp/asset/a126f324-65c4-4fd1-b26a-f7a98bcd9bd3"
+                alt=""
+                width="60"
+                height="60"
+              />
+              <div>
+                <a href="https://www.linkedin.com/in/tarjei-%C3%B8deg%C3%A5rd-38bb7a83/" target="_blank" rel="noreferrer">Tarjei Ødegård</a>
+                <p data-i18n="kyr.role_collaborator">Collaborator - sopra steria/eggs</p>
+              </div>
+            </div>
+            <div class="ttj-person">
+              <img
+                class="ttj-img"
+                src="https://www.figma.com/api/mcp/asset/bc427591-9f05-4c16-82ae-d5476550fc67"
+                data-local="/images/kyr/person-mosse.png"
+                data-remote="https://www.figma.com/api/mcp/asset/bc427591-9f05-4c16-82ae-d5476550fc67"
+                alt=""
+                width="60"
+                height="60"
+              />
+              <div>
+                <a href="https://www.linkedin.com/in/mosse-sjaastad-42523515b/" target="_blank" rel="noreferrer">Mosse Sjaastad</a>
+                <p data-i18n="kyr.role_mentor">Mentor - Course leader</p>
+              </div>
+            </div>
+            <div class="ttj-person">
+              <img
+                class="ttj-img"
+                src="https://www.figma.com/api/mcp/asset/71720d06-383c-4c6e-9495-15b9f98163d3"
+                data-local="/images/kyr/person-fredrik.png"
+                data-remote="https://www.figma.com/api/mcp/asset/71720d06-383c-4c6e-9495-15b9f98163d3"
+                alt=""
+                width="60"
+                height="60"
+              />
+              <div>
+                <a href="https://www.linkedin.com/in/movito/" target="_blank" rel="noreferrer">Fredrik Matheson</a>
+                <p data-i18n="kyr.role_tutor">Tutor</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ttj-sponsors ttj-sponsors--row kyr-sponsors" aria-label="Partners">
+          <span class="kyr-logo kyr-logo--aho">
+            <img
+              class="ttj-img kyr-logo__on-dark"
+              data-kyr-logo="aho"
+              data-kyr-logo-theme="dark"
+              alt="The Oslo School of Architecture and Design"
+              width="730"
+              height="294"
+            />
+            <img
+              class="ttj-img kyr-logo__on-light"
+              data-kyr-logo="aho"
+              data-kyr-logo-theme="light"
+              alt=""
+              width="730"
+              height="294"
+              aria-hidden="true"
+            />
+          </span>
+          <span class="kyr-logo kyr-logo--eggs">
+            <img
+              class="ttj-img kyr-logo__on-dark"
+              data-kyr-logo="eggs"
+              data-kyr-logo-theme="dark"
+              alt="EGGS Design"
+              width="575"
+              height="275"
+            />
+            <img
+              class="ttj-img kyr-logo__on-light"
+              data-kyr-logo="eggs"
+              data-kyr-logo-theme="light"
+              alt=""
+              width="575"
+              height="275"
+              aria-hidden="true"
+            />
+          </span>
+          <span class="kyr-logo kyr-logo--sopra">
+            <img
+              class="ttj-img kyr-logo__on-dark"
+              data-kyr-logo="sopra"
+              data-kyr-logo-theme="dark"
+              alt="Sopra Steria"
+              width="626"
+              height="92"
+            />
+            <img
+              class="ttj-img kyr-logo__on-light"
+              data-kyr-logo="sopra"
+              data-kyr-logo-theme="light"
+              alt=""
+              width="626"
+              height="92"
+              aria-hidden="true"
+            />
+          </span>
+        </div>
+      </section>
+
+      <section class="ttj-section ttj-block" data-section id="demo">
+        <div class="ttj-video ttj-video--hero">
+          <video
+            controls
+            playsinline
+            muted
+            preload="metadata"
+            aria-label="Know Your Rights demo video"
+          >
+            <source src="/assets/kyr/demo.mov" type="video/mp4" />
+          </video>
+        </div>
+      </section>
+
+      <section class="ttj-section ttj-block" data-section id="challenge">
+        <h2 class="ttj-section__heading"><span class="ttj-section__number">00</span> <span data-i18n="kyr.s00">Challenge &amp; my role</span></h2>
+        <div class="ttj-challenge">
+        <div class="ttj-challenge__visual ttj-challenge__visual--fill">
+            <img
+              src="/images/kyr/challenge/deliverables.png?v=kyr1"
+              alt="Deliverables: interactive prototype, value reflection, value proposition canvas"
+              width="1600"
+              height="900"
+              onerror="this.onerror=null;this.src='/images/covers/challenge-join-jam.png?v=kyr-deliverables4'"
+            />
+          </div>
+          <div class="ttj-challenge__copy">
+            <h3 data-i18n="kyr.challenge_h">Challenge</h3>
+            <p data-i18n="kyr.challenge_p">
+              The brief was open: develop a concept for a digital product in five weeks. It could start from a small everyday frustration or a larger systemic issue — size didn't matter. What mattered was defining a focused scope, explaining why it was worth solving, and turning it into something real and testable — while holding both a business and a design perspective throughout the project.
+            </p>
+            <h3 data-i18n="kyr.role_h">My role</h3>
+            <p data-i18n="kyr.role_p1">
+              I framed my own project. I pitched three directions: a better way to report to the police, a stronger embassy service, and workers' rights — and chose to go deeper on workers' rights.
+            </p>
+            <p data-i18n="kyr.role_p2">
+              My role was to deliver the required outcomes — an interactive prototype, a value reflection, and a value proposition canvas — build a future plan, and meet with Sopra Steria along the way for feedback and course correction. I also made sure I was present for every class excursion.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="ttj-section ttj-block" data-section id="analysis">
+        <h2 class="ttj-section__heading"><span class="ttj-section__number">01</span> <span data-i18n="kyr.s01">Research &amp; insight</span></h2>
+        <p class="ttj-section__text ttj-analysis__caption" id="analysis-caption" data-i18n="kyr.a0">
+          Problem statement
+        </p>
+        <div class="ttj-analysis">
+          <div class="ttj-analysis__frame ttj-analysis__frame--fill">
+            <img
+              id="analysis-image"
+              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23ddd' width='100%25' height='100%25'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage later%3C/text%3E%3C/svg%3E"
+              alt="Analysis board 1 of 5"
+              width="1680"
+              height="900"
+            />
+          </div>
+          <div class="ttj-analysis__bar">
+            <button type="button" class="ttj-analysis__btn" id="analysis-prev" data-i18n-attr="aria-label:kyr.prev">‹</button>
+            <div
+              class="ttj-analysis__track"
+              role="progressbar"
+              aria-valuemin="1"
+              aria-valuemax="9"
+              aria-valuenow="1"
+              data-i18n-attr="aria-label:kyr.progress"
+              id="analysis-progress"
+            >
+              <div class="ttj-analysis__fill" id="analysis-progress-fill"></div>
+            </div>
+            <button type="button" class="ttj-analysis__btn" id="analysis-next" data-i18n-attr="aria-label:kyr.next_aria">›</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="ttj-section ttj-block" data-section id="design">
+        <h2 class="ttj-section__heading"><span class="ttj-section__number">02</span> <span data-i18n="kyr.s02">Design</span></h2>
+        <div class="kyr-stack" id="design-stack" aria-label="Design boards">
+          <!-- Filled by kyr-assets + case-study.js -->
+        </div>
+      </section>
+
+      <section class="ttj-section ttj-block" data-section id="prototype">
+        <h2 class="ttj-section__heading"><span class="ttj-section__number">03</span> <span data-i18n="kyr.s03">Prototype &amp; testing</span></h2>
+        <div class="kyr-stack" id="prototype-stack" aria-label="Prototype and testing boards">
+          <!-- Filled by kyr-assets + case-study.js -->
+        </div>
+      </section>
+
+      <section class="ttj-section ttj-block" data-section id="result">
+        <h2 class="ttj-section__heading"><span class="ttj-section__number">04</span> <span data-i18n="kyr.s04">Result</span></h2>
+        <!-- Side poster (rights-poster) + journey — filled by kyr-assets + case-study.js -->
+        <div class="kyr-result-row" id="result-row">
+          <figure class="kyr-result-side" id="result-side" aria-label="Rights awareness poster">
+          </figure>
+          <div class="kyr-journey" id="result-journey" aria-label="User journey from confusion to knowing your rights">
+          </div>
+        </div>
+        <div class="kyr-stack" id="result-stack" aria-label="Result boards">
+          <!-- Filled by kyr-assets + case-study.js -->
+        </div>
+      </section>
+
+      <section class="ttj-section ttj-block" data-section id="retrospective">
+        <h2 class="ttj-section__heading"><span class="ttj-section__number">05</span> <span data-i18n="kyr.s05">Retrospective</span></h2>
+        <!-- Figma notebook: 1572 × 1120 -->
+        <div class="ttj-retro ttj-retro--blurred" id="retro">
+          <img
+            class="ttj-img"
+            src="/images/kyr/retro-notes.jpg"
+            data-local="/images/kyr/retro-notes.jpg"
+            alt="Process notebook"
+            width="1572"
+            height="1120"
+          />
+          <form class="ttj-retro__unlock" id="unlock-form">
+            <p data-i18n="kyr.unlock">Enter the 6-digit code to view the full process</p>
+            <input id="unlock-code" type="text" inputmode="numeric" maxlength="6" placeholder="••••••" aria-label="Unlock code" />
+            <button type="submit" data-i18n="kyr.unlock_btn">Unlock</button>
+            <span id="unlock-error" hidden data-i18n="kyr.unlock_err">Incorrect code</span>
+          </form>
+        </div>
+        <p class="ttj-section__text" data-i18n="kyr.retro_p">
+          If you have received my visit card, there is a code written that will give you access
+          to view my documented process on paper. I sketch to have a database that allows me to
+          extract previous info and make better planning in the future.
+        </p>
+      </section>
+
+      <section
+        class="ttj-next"
+        data-section
+        id="next"
+        style="background:#ff5100;color:#111;width:100%;margin:80px 0 0;padding:64px 0 100px;box-sizing:border-box;border-radius:28px 28px 0 0;"
+      >
+        <h2 data-i18n="kyr.next">Next project</h2>
+        <a class="ttj-next__card" href="/tap-to-join.html">
+          <div class="ttj-next__visual">
+            <img
+              data-cover="tapToJoin"
+              src="/images/covers/tap-to-join.png?v=ttjcover1"
+              alt=""
+              width="1024"
+              height="1024"
+            />
+          </div>
+          <div class="ttj-next__copy">
+            <p class="ttj-next__eyebrow">“Know Your rights”</p>
+            <p class="ttj-next__title" data-i18n="kyr.next_title">Bring friends together through music</p>
+          </div>
+        </a>
+      </section>
+    </div>
+
+    <p class="site-live-count" aria-live="polite" hidden>
+      <span data-visitor-count></span>
+      <span data-i18n="utils.visiting">visiting</span>
+    </p>
+
+    <script src="/js/case-study-images.js?v=fix1"></script>
+    <script src="/js/translations.js?v=devices1"></script>
+    <script src="/js/i18n.js?v=phonetop4"></script>
+    <script src="/js/theme.js"></script>
+    <script src="/js/site-utils.js?v=phonetop4"></script>
+    <script src="/js/site-mail.js?v=phonetop4"></script>
+    <script src="/js/presence.js?v=livecount2"></script>
+    <script src="/js/site-nav.js?v=mouthfix2"></script>
+    <script src="/js/keyboard-nav.js?v=stops2"></script>
+    <script type="module" src="/js/me-assets.js?v=fix1"></script>
+    <script type="module" src="/js/kyr-assets.js?v=fix1"></script>
+    <script type="module" src="/js/covers-assets.js?v=ttjcover1"></script>
+    <script src="/js/watermark.js?v=wm5"></script>
+    <script src="/js/case-study.js?v=unlock190670"></script>
+    <script src="/js/content-guard.js?v=6"></script>
+  </body>
+</html>

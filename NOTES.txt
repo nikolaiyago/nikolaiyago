@@ -1,0 +1,143 @@
+NOTES — how this portfolio site is built
+========================================
+
+How files are organized (read this first)
+-----------------------------------------
+  HTML  → structure + short comment blocks at the top of each page
+  CSS   → look / layout; each file starts with a section map
+  JS    → behaviour; each file starts with “what this does” + how-to
+
+  Shared (every page):
+    css/base.css          themes, logo nav, top-right utils, cursors
+    js/translations.js    NO / ENG / ESP strings
+    js/i18n.js            applies those strings
+    js/theme.js           dark / light
+    js/presence.js        live visitors + devices tip on hover + cursors
+    js/site-nav.js        expanding logo menu
+    js/keyboard-nav.js    Tab / Enter / Esc
+
+  Page-specific:
+    index.html + css/home.css + js/home.js
+    case-studies.html + css/case-studies.css + js/case-studies.js
+    tap-to-join.html + css/tap-to-join.css + js/tap-to-join.js
+    collection.html + css/collection.css
+
+
+Stack (what you asked for)
+--------------------------
+Everything you edit is plain:
+
+  HTML  → structure (what is on the page)
+  CSS   → look / layout (colors, fonts, spacing)
+  JS    → behaviour (filters, scroll snap, keyboard, unlock)
+
+There is NO React required to run or understand the site anymore.
+Vite is only a tiny local server so you can open the pages with live reload.
+
+
+Folder map
+----------
+case-studies/
+  index.html              Home page
+  case-studies.html       Case Studies gallery
+  tap-to-join.html        Tap To Join case study detail
+
+  css/
+    base.css              Shared fonts, colors, keyboard focus rings
+    home.css              Home page layout
+    case-studies.css      Case Studies gallery + side rail + snap
+    tap-to-join.css       Tap To Join case study layout
+
+  js/
+    keyboard-nav.js       Tab = sections, Enter = inside, Esc = back out
+    home.js               Home chips / timeline / back-to-top
+    case-studies.js       Filters, project cards, wheel snap, side rail
+    tap-to-join.js        Unlock code + analysis carousel
+    translations.js       NO / ENG / ESP strings
+    i18n.js               Language switcher
+    theme.js              Dark / light mode
+    presence.js           Live visitors + devices tip on hover + cursors
+    site-nav.js           Expanding logo menu
+
+  presence/
+    server.mjs            WebSocket server for live visitors/cursors/devices
+    data/devices.json     Persisted unique device ids (created at runtime)
+
+
+Top-right controls (every page)
+-------------------------------
+  NO · ENG · ESP     switch language (saved in the browser)
+  “N visiting”       live connected clients — hover for total unique devices;
+                     click to show/hide other people’s cursors
+                     (each cursor shows a country flag from their IP)
+  Dark / Light       theme toggle
+
+Run locally with live visitors:
+  npm run dev
+  (starts Vite + the presence server together)
+
+  public/fonts/
+    Bison-Bold.ttf        Your display font
+
+
+Keyboard navigation (every page)
+--------------------------------
+1) Press Tab
+   → next SECTION
+
+2) Press Option+Tab (⌥+Tab) or Shift+Tab
+   → previous SECTION
+
+3) Press Enter while a section is focused
+   → goes INSIDE that section
+   → Tab / Option+Tab move between buttons / links / inputs
+
+4) Press Escape
+   → leaves the section and goes back to section-jumping mode
+
+Blue outline  = section focus
+Orange outline = control focus inside a section
+
+
+How to run
+----------
+  cd ~/Projects/case-studies
+  npm run dev
+
+Then open:
+  http://127.0.0.1:5173/           Home
+  http://127.0.0.1:5173/case-studies.html
+  http://127.0.0.1:5173/tap-to-join.html
+
+
+Where to change content
+-----------------------
+- Home text/images     → index.html
+- Home snap / layout   → css/home.css + js/home.js
+- Project list         → js/case-studies.js  (STUDIES array)
+- Tap To Join copy     → tap-to-join.html
+- Unlock code          → js/tap-to-join.js   (UNLOCK_CODE)
+- Colors / fonts       → css/base.css
+- Tap To Join images   → public/images/ttj/  (run scripts/download-ttj-images.sh)
+
+Tap To Join speed
+-----------------
+Images are sized to Figma frames (analysis 1680×900, notes 1572×1120, etc.)
+so the layout does not jump. Case Studies prefetches the big images.
+For fully instant loads, run once:
+
+  bash scripts/download-ttj-images.sh
+
+
+Home snap frames
+----------------
+Each Home section (`.home-snap`) is exactly one screen tall.
+Text, images, and buttons keep their designed size/position;
+extra space is empty frame around them. Wheel / scroll snaps
+section to section — same idea as Case Studies.
+
+
+Old React files
+---------------
+The previous React/TypeScript files may still sit under src/.
+You can ignore or delete that folder; the live site uses the HTML/CSS/JS files above.

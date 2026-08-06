@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>document.documentElement.setAttribute("data-theme",localStorage.getItem("portfolio-theme")||"dark");</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/images/logo.png?v=logo6" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=logo6" />
+    <title>WCAG — Nikolai Yago Conde</title>
+
+    <link rel="preload" as="image" href="/images/wcag/hero/banner.png?v=wcag28" fetchpriority="high" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://www.figma.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/base.css?v=projnav3" />
+      <link rel="stylesheet" href="/css/tap-to-join.css?v=phonetop4" />
+  </head>
+  <body class="page-wcag">
+    <!--
+      ============================================
+      WCAG — case study detail
+      ============================================
+      Figma node 811:7711 (hero + intro + team). Sections:
+      PDF (above 00), Challenge, Analysis, Design, Result, Retrospective.
+      No Prototype section. Assets: public/images/wcag/<section>/ + Vite assets/wcag/
+    -->
+
+    <nav class="site-nav site-nav--project" aria-label="Primary">
+      <div class="site-nav__shell">
+                <span class="site-nav__logo" aria-hidden="true">
+          <img
+            src="/images/logo.svg?v=logo7"
+            alt=""
+            width="80"
+            height="80"
+          />
+        </span>
+        <div class="site-nav__mouth">
+          <div class="site-nav__menu">
+            <a class="site-nav__link" data-nav="me" href="/index.html" data-i18n="nav.me">Me</a>
+            <a class="site-nav__link" data-nav="cases" href="/case-studies.html" aria-label="Case Studies"><span class="site-nav__link-line">Case</span><span class="site-nav__link-line">Studies</span></a>
+            <a class="site-nav__link" data-nav="collection" href="/collection.html" data-i18n="nav.collection">Collection</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="site-utils" aria-label="Site utilities">
+      <button
+        type="button"
+        class="site-utils__menu-btn"
+        data-utils-open
+        aria-expanded="false"
+        aria-controls="site-utils-panel"
+        data-i18n-attr="aria-label:utils.menu"
+      >
+        <span class="site-utils__menu-icon" aria-hidden="true"></span>
+      </button>
+
+      <div class="site-utils__panel" id="site-utils-panel">
+        <button
+          type="button"
+          class="site-utils__close"
+          data-utils-close
+          data-i18n-attr="aria-label:utils.close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+
+        <div class="site-utils__langs" role="group" data-i18n-attr="aria-label:utils.lang">
+          <button type="button" class="site-utils__lang" data-lang="NO">NO</button>
+          <button type="button" class="site-utils__lang" data-lang="ENG">ENG</button>
+          <button type="button" class="site-utils__lang" data-lang="ESP">ESP</button>
+        </div>
+
+        <button type="button" class="site-utils__theme" data-theme-toggle aria-label="Theme">
+          <span class="site-utils__theme-icon" aria-hidden="true"></span>
+          <span data-theme-label data-i18n="utils.dark">Dark</span>
+        </button>
+
+        <!-- Mail: phone utils grid cell; desktop fixed FAB (position:fixed escapes panel) -->
+        <button
+          type="button"
+          class="home-mail"
+          id="copy-email"
+          data-email="nikolaiconde@gmail.com"
+          data-i18n-attr="aria-label:home.email"
+        >
+          <span class="home-mail__label" aria-live="polite">
+            <svg class="home-mail__copy-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="8" y="8" width="12" height="12" rx="2.5" stroke="currentColor" stroke-width="2" />
+              <path
+                d="M6 14.5V6.5A2.5 2.5 0 0 1 8.5 4H16"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            <span data-i18n="home.email_copied">Email Copied</span>
+          </span>
+          <span class="home-mail__icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="2" />
+              <path
+                d="M4 7.5 12 13l8-5.5"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+
+
+    <div class="ttj">
+      <section class="ttj-hero-wrap" data-section id="hero">
+        <div class="ttj-hero ttj-hero--cover ttj-hero--wcag">
+          <img
+            class="ttj-img"
+            data-wcag-hero
+            src="/images/wcag/hero/banner.png?v=wcag28"
+            alt="Introduction to accessibility — POUR characters"
+            width="1728"
+            height="728"
+            fetchpriority="high"
+            decoding="sync"
+          />
+        </div>
+        <header class="ttj-header">
+          <h1 data-i18n="wcag.title">WCAG</h1>
+          <p class="ttj-header__subtitle" data-i18n="wcag.subtitle">Interaction design - Education &amp; learning / February 2026</p>
+          <div class="ttj-tags">
+            <span class="ttj-tags__label" data-i18n="wcag.tags">Tags:</span>
+            <span class="ttj-tag" data-i18n="wcag.tag_a11y">Accessibility &amp; inclusive design</span>
+            <span class="ttj-tag" data-i18n="wcag.tag_research">Analysing</span>
+            <span class="ttj-tag" data-i18n="wcag.tag_info">Information design</span>
+            <span class="ttj-tag" data-i18n="wcag.tag_proto">Psychology</span>
+          </div>
+          <p class="ttj-duration">
+            <span class="ttj-duration__label" data-i18n="wcag.duration_label">Duration:</span>
+            <span class="ttj-duration__value" data-i18n="wcag.duration">3 weeks</span>
+          </p>
+        </header>
+      </section>
+
+      <section class="ttj-intro ttj-block" data-section id="intro">
+        <div class="ttj-intro__copy">
+          <p data-i18n="wcag.intro_p1">
+            The standard that defines accessibility on the web is itself one of the least accessible documents you'll ever read.
+          </p>
+          <p data-i18n="wcag.intro_p2">
+            WCAG, the Web Content Accessibility Guidelines, is the legal benchmark for whether a digital service works for everyone, including people with disabilities. In Norway, failing to meet it means enforcement and heavy fines. But the guidelines are written in dense, compliance-first language that most designers struggle to navigate. We were a class of 20 students who decided to do something about it. Split into five groups, each took a section of WCAG and redesigned how it's explained. Our group took Understandable, the principle covering clear language, predictable behaviour, and helpful error handling. Which gave us a fittingly strange task: explain, in plain terms, the part of an accessibility standard that's supposed to be about being plain in the first place.
+          </p>
+        </div>
+        <div class="ttj-intro__team">
+          <!-- Always visible: Nikolai’s group (Understandable) -->
+          <div class="ttj-intro__group">
+            <h2 data-i18n="wcag.group_understandable">Understandable group</h2>
+            <div class="ttj-person">
+              <img
+                class="ttj-img"
+                src="/images/me/nikolai-yago-conde.png?v=me1"
+                data-local="/images/me/nikolai-yago-conde.png?v=me1"
+                data-me-person="nikolai"
+                alt="Nikolai Yago Conde"
+                width="60"
+                height="60"
+              />
+              <div>
+                <a href="https://www.linkedin.com/in/nikolai-yago-conde-3231773b3/?skipRedirect=true" target="_blank" rel="noreferrer">Nikolai Yago Conde</a>
+                <p data-i18n="wcag.role_student">Interaction designer Student</p>
+              </div>
+            </div>
+            <div class="ttj-person">
+              <img
+                class="ttj-img"
+                src="/images/wcag/people/signe-winters.jpg?v=wcag28"
+                data-local="/images/wcag/people/signe-winters.jpg?v=wcag28"
+                data-remote="https://www.figma.com/api/mcp/asset/77d4a3fb-0bb0-4b08-8fcd-16e14f779c91"
+                data-wcag-person="signe"
+                alt="Signe Winters"
+                width="60"
+                height="60"
+              />
+              <div>
+                <a href="https://www.linkedin.com/in/signe-winters-a3a597260/" target="_blank" rel="noreferrer">Signe Winters</a>
+                <p data-i18n="wcag.role_student">Interaction designer Student</p>
+              </div>
+            </div>
+            <div class="ttj-person">
+              <img class="ttj-img" src="https://www.figma.com/api/mcp/asset/06f47b9d-40b3-4830-89a9-c58499bba440" data-remote="https://www.figma.com/api/mcp/asset/06f47b9d-40b3-4830-89a9-c58499bba440" alt="" width="60" height="60" />
+              <div>
+                <a href="https://www.linkedin.com/in/jonas-thommessen-6340b2271/" target="_blank" rel="noreferrer">Jonas Thommessen</a>
+                <p data-i18n="wcag.role_student">Interaction designer Student</p>
+              </div>
+            </div>
+            <div class="ttj-person">
+              <img class="ttj-img" src="https://www.figma.com/api/mcp/asset/d051d17f-3fc6-4bdd-a58c-fa988119dff0" data-remote="https://www.figma.com/api/mcp/asset/d051d17f-3fc6-4bdd-a58c-fa988119dff0" alt="" width="60" height="60" />
+              <div>
+                <p class="ttj-person__name">Andrea</p>
+                <p data-i18n="wcag.role_student">Interaction designer Student</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Always visible: Supervisor -->
+          <div class="ttj-intro__group">
+            <h2 data-i18n="wcag.supervisor">Supervisor</h2>
+            <div class="ttj-person">
+              <img class="ttj-img" src="https://www.figma.com/api/mcp/asset/06b86cf9-afe0-407e-b71d-e8058ffb36dd" data-remote="https://www.figma.com/api/mcp/asset/06b86cf9-afe0-407e-b71d-e8058ffb36dd" alt="" width="60" height="60" />
+              <div>
+                <a href="https://www.linkedin.com/in/movito/" target="_blank" rel="noreferrer">Fredrik Matheson</a>
+                <p data-i18n="wcag.role_tutor">Tutor</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Other participants: single accordion, default closed -->
+          <div class="wcag-other-groups">
+            <button
+              type="button"
+              class="wcag-other-groups__toggle"
+              id="wcag-other-groups-toggle"
+              aria-expanded="false"
+              aria-controls="wcag-other-groups-panel"
+            >
+              <span data-i18n="wcag.other_participants">Other participants</span>
+              <span class="wcag-other-groups__icon" aria-hidden="true"></span>
+            </button>
+            <div
+              id="wcag-other-groups-panel"
+              class="wcag-other-groups__panel"
+              role="region"
+              aria-labelledby="wcag-other-groups-toggle"
+              hidden
+            >
+              <div class="wcag-other-groups__grid">
+                <div class="ttj-intro__group">
+                  <h2 data-i18n="wcag.group_intro">Intro group</h2>
+                  <div class="ttj-person">
+                    <img class="ttj-img" src="https://www.figma.com/api/mcp/asset/df026348-4c85-47f8-8de0-6fc0a097f7db" data-remote="https://www.figma.com/api/mcp/asset/df026348-4c85-47f8-8de0-6fc0a097f7db" alt="" width="60" height="60" />
+                    <div>
+                      <a href="https://www.linkedin.com/in/astridmathilde/" target="_blank" rel="noreferrer">Astrid Mathilde Boberg</a>
+                      <p data-i18n="wcag.role_student">Interaction designer Student</p>
+                    </div>
+                  </div>
+                  <div class="ttj-person">
+                    <img class="ttj-img" src="https://www.figma.com/api/mcp/asset/e862ee72-5287-4c94-9580-2322f70e0ba1" data-remote="https://www.figma.com/api/mcp/asset/e862ee72-5287-4c94-9580-2322f70e0ba1" alt="" width="60" height="60" />
+                    <div>
+                      <a href="https://www.linkedin.com/in/hanqi-du-7675953b4/" target="_blank" rel="noreferrer">Hanqi Du</a>
+                      <p data-i18n="wcag.role_student">Interaction designer Student</p>
+                    </div>
+                  </div>
+                  <div class="ttj-person">
+                    <img class="ttj-img" src="https://www.figma.com/api/mcp/asset/9749e4ff-8326-4a4a-8b2a-d358f27b714c" data-remote="https://www.figma.com/api/mcp/asset/9749e4ff-8326-4a4a-8b2a-d358f27b714c" alt="" width="60" height="60" />
+                    <div>
+                      <p class="ttj-person__name">Oda Yttredal</p>
+                      <p data-i18n="wcag.role_student">Interaction designer Student</p>
+                    </div>
+                  </div>
+                  <div class="ttj-person">
+                    <img class="ttj-img" src="https://www.figma.com/api/mcp/asset/3bde4a34-f975-40b5-9479-71480fdc57ab" data-remote="https://www.figma.com/api/mcp/asset/3bde4a34-f975-40b5-9479-71480fdc57ab" alt="" width="60" height="60" />
+                    <div>
+                      <a href="https://www.linkedin.com/in/gudrunhg/" target="_blank" rel="noreferrer">Gudrun Hoff Gardå</a>
+                      <p data-i18n="wcag.role_student">Interaction designer Student</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ttj-intro__group">
+                  <h2 data-i18n="wcag.group_perceivable">Perceivable group</h2>
+                  <div class="ttj-person">
+                    <img class="ttj-img" src="https://www.figma.com/api/mcp/asset/d6742b5a-f2de-43b5-9d9d-8b94f59ed150" data-remote="https://www.figma.com/api/mcp/asset/d6742b5a-f2de-43b5-9d9d-8b94f59ed150" alt="" width="60" height="60" />
+                    <div>
+                      <p class="ttj-person__name">Ragna Oline Botten</p>
+                      <p data-i18n="wcag.role_student">Interaction designer Student</p>
+                    </div>
+                  </div>
+                  <div class="ttj-person">
+                    <img class="ttj-img" src="https://www.figma.com/api/mcp/asset/b0e76a8c-6a29-449c-b7d4-fb390cd7c037" data-remote="https://www.figma.com/api/mcp/asset/b0e76a8c-6a29-449c-b7d4-fb390cd7c037" alt="" width="60" height="60" />
+                    <div>
+                      <p class="ttj-person__name">Milla Bervell</p>
+                      <p data-i18n="wcag.role_student">Interaction designer Student</p>
+                    </div>
+                  </div>
+                  <div class="ttj-person">
+                    <img class="ttj-img" src="https://www.figma.com/api/mcp/asset/2182a610-76d0-4617-b430-acfb3dd1901a" data-remote="https://www.figma.com/api/mcp/asset/2182a610-76d0-4617-b430-acfb3dd1901a" alt="" width="60" height="60" />
+                    <div>
+                      <a href="https://www.linkedin.com/in/elisabet-tuft-botnen/" target="_blank" rel="noreferrer">Elisabet Tuft Botnen</a>
+                      <p data-i18n="wcag.role_student">Interaction designer Student</p>
+                    </div>
+                  </div>
+                  <div class="ttj-person">
+                    <img class="ttj-img" src="https://www.figma.com/api/mcp/asset/2a8f6473-c4ce-45c8-bab3-bd63f8d25524" data-remote="https://www.figma.com/api/mcp/asset/2a8f6473-c4ce-45c8-bab3-bd63f8d25524" alt="" width="60" height="60" />
+                    <div>
+                      <a href="https://www.linkedin.com/in/fredrik-haraldstad-1a3b77257/" target="_blank" rel="noreferrer">Fredrik Haraldstad</a>
+                      <p data-i18n="wcag.role_student">Interaction designer Student</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ttj-intro__group">
+                  <h2 data-i18n="wcag.group_robust">Robust group</h2>
+                  <div class="ttj-person">
+                    <img class="ttj-img" src="https://www.figma.com/api/mcp/asset/b7fe6ede-0da6-45a1-b714-2caf3d2429dd" data-remote="https://www.figma.com/api/mcp/asset/b7fe6ede-0da6-45a1-b714-2caf3d2429dd" alt="" width="60" height="60" />
+                    <div>
+                      <a href="https://www.linkedin.com/in/andreas-mitchley-6239551b7/" target="_blank" rel="noreferrer">Andreas Slapgård Mitchley</a>
+                      <p data-i18n="wcag.role_student">Interaction designer Student</p>
+                    </div>
+                  </div>
+                  <div class="ttj-person">
+                    <img class="ttj-img" src="https://www.figma.com/api/mcp/asset/47697925-fd4b-4178-adfe-98eb1088ea84" data-remote="https://www.figma.com/api/mcp/asset/47697925-fd4b-4178-adfe-98eb1088ea84" alt="" width="60" height="60" />
+                    <div>
+                      <p class="ttj-person__name">Chaumiya Vasanthan</p>
+                      <p data-i18n="wcag.role_student">Interaction designer Student</p>
+                    </div>
+                  </div>
+                  <div class="ttj-person">
+                    <img class="ttj-img" src="https://www.figma.com/api/mcp/asset/e7d1972e-2ff4-44e2-b28a-8eb495ffe11b" data-remote="https://www.figma.com/api/mcp/asset/e7d1972e-2ff4-44e2-b28a-8eb495ffe11b" alt="" width="60" height="60" />
+                    <div>
+                      <a href="https://www.linkedin.com/in/lovis-julia-vlieger-97946a238/" target="_blank" rel="noreferrer">Lovis Julia Vlieger</a>
+                      <p data-i18n="wcag.role_student">Interaction designer Student</p>
+                    </div>
+                  </div>
+                  <div class="ttj-person">
+                    <img
+                      class="ttj-img"
+                      src="/images/wcag/people/sophia-schandy-kamtsikoudis.jpg?v=wcag28"
+                      data-local="/images/wcag/people/sophia-schandy-kamtsikoudis.jpg?v=wcag28"
+                      data-remote="https://www.figma.com/api/mcp/asset/1c8c045a-23f2-41a6-81d6-1c03b85eb90e"
+                      data-wcag-person="sophia"
+                      alt="Sophia Schandy Kamtsikoudis"
+                      width="60"
+                      height="60"
+                    />
+                    <div>
+                      <a href="https://www.linkedin.com/in/sophia-schandy-kamtsikoudis-59ab68368/" target="_blank" rel="noreferrer">Sophia Schandy Kamtsikoudis</a>
+                      <p data-i18n="wcag.role_student">Interaction designer Student</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ttj-intro__group">
+                  <h2 data-i18n="wcag.group_operable">Operable group</h2>
+                  <div class="ttj-person">
+                    <img class="ttj-img" src="https://www.figma.com/api/mcp/asset/eed8edfb-f4ee-47ca-8acb-5d8e1a631c88" data-remote="https://www.figma.com/api/mcp/asset/eed8edfb-f4ee-47ca-8acb-5d8e1a631c88" alt="" width="60" height="60" />
+                    <div>
+                      <a href="https://www.linkedin.com/in/mathildeekelimullis/" target="_blank" rel="noreferrer">Mathilde Ekeli Mullis</a>
+                      <p data-i18n="wcag.role_student">Interaction designer Student</p>
+                    </div>
+                  </div>
+                  <div class="ttj-person">
+                    <img class="ttj-img" src="https://www.figma.com/api/mcp/asset/44d70bfc-a5ef-4eaa-94d4-3c7d48fed3d6" data-remote="https://www.figma.com/api/mcp/asset/44d70bfc-a5ef-4eaa-94d4-3c7d48fed3d6" alt="" width="60" height="60" />
+                    <div>
+                      <a href="https://www.linkedin.com/in/serafin-kjensli-05b462403/" target="_blank" rel="noreferrer">Serafin Kjensli</a>
+                      <p data-i18n="wcag.role_student">Interaction designer Student</p>
+                    </div>
+                  </div>
+                  <div class="ttj-person">
+                    <img class="ttj-img" src="https://www.figma.com/api/mcp/asset/9071c45b-1f54-404e-b4a3-a57b19533ae4" data-remote="https://www.figma.com/api/mcp/asset/9071c45b-1f54-404e-b4a3-a57b19533ae4" alt="" width="60" height="60" />
+                    <div>
+                      <a href="https://www.linkedin.com/in/isak-patrick-hembery-4aa739293/" target="_blank" rel="noreferrer">Isak Patrick Hembery</a>
+                      <p data-i18n="wcag.role_student">Interaction designer Student</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ttj-sponsors ttj-sponsors--row wcag-sponsors" aria-label="Partners">
+          <span class="kyr-logo kyr-logo--aho wcag-logo">
+            <img
+              class="ttj-img kyr-logo__on-dark"
+              data-wcag-logo="aho"
+              data-wcag-logo-theme="dark"
+              alt="The Oslo School of Architecture and Design"
+              width="482"
+              height="194"
+            />
+            <img
+              class="ttj-img kyr-logo__on-light"
+              data-wcag-logo="aho"
+              data-wcag-logo-theme="light"
+              alt=""
+              width="482"
+              height="194"
+              aria-hidden="true"
+            />
+          </span>
+        </div>
+      </section>
+
+      <div class="wcag-finished ttj-block" data-i18n-attr="aria-label:wcag.pdf_label" aria-label="Finished product: Understandable resource (PDF)">
+        <div class="wcag-pdf-frame">
+          <iframe
+            class="wcag-pdf-frame__embed"
+            data-wcag-pdf-frame
+            src="/assets/wcag/understandable.pdf?v=wcag33#view=FitH"
+            title="Understandable — WCAG learning resource (PDF)"
+            data-i18n-attr="title:wcag.pdf_title"
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="wcag-pdf-actions" role="group" data-i18n-attr="aria-label:wcag.resources_label" aria-label="Project resources">
+          <a
+            class="wcag-resource-btn"
+            data-wcag-pdf-link
+            href="/assets/wcag/understandable.pdf?v=wcag33"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-i18n="wcag.pdf_open"
+            >Open PDF</a
+          >
+          <a
+            class="wcag-resource-btn"
+            href="https://www.w3.org/TR/WCAG22/"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-i18n="wcag.btn_wcag_page"
+            >WCAG page</a
+          >
+          <a
+            class="wcag-resource-btn"
+            href="https://www.figma.com/community/file/1659176962480306516"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-i18n="wcag.btn_figma_file"
+            >Figma file</a
+          >
+        </div>
+      </div>
+
+      <section class="ttj-section ttj-block" data-section id="challenge">
+        <h2 class="ttj-section__heading"><span class="ttj-section__number">00</span> <span data-i18n="wcag.s00">Challenge &amp; my role</span></h2>
+        <div class="ttj-challenge">
+          <div class="wcag-challenge-media">
+            <div class="ttj-challenge__visual wcag-challenge__visual">
+              <img
+                data-wcag-challenge
+                src="/images/wcag/challenge/accessibility-legal-pad.jpg?v=wcag28"
+                alt="Cartoon on yellow legal pad: ME* holding a WCAG 2.2 card and saying Accessibility, beside someone asking but is it accessible for him?"
+                width="692"
+                height="1024"
+              />
+            </div>
+          </div>
+          <div class="ttj-challenge__copy">
+            <h3 data-i18n="wcag.challenge_h">Challenge</h3>
+            <p data-i18n-html="wcag.challenge_p1">
+              The challenge was simple: make WCAG more accessible for the people who actually need to use it. Today, WCAG is a legal standard: failure to meet it can result in daily fines. <a href="https://www.tv2.no/nyheter/innenriks/sas-kan-fa-dagboter-pa-150000-kroner-for-darlig-nettside/10023532/" target="_blank" rel="noopener noreferrer">SAS faced exactly that in 2018.</a>
+            </p>
+            <p data-i18n-html="wcag.challenge_p2">
+              The irony is that the WCAG 2.2 website itself is a terrible way to access the information intuitively, and they're the ones that determine whether <a href="https://www.uutilsynet.no/tilsyn/nav-blir-ilagt-dagboter/796" target="_blank" rel="noopener noreferrer">Uutilsynet comes after you.</a>
+            </p>
+            <p data-i18n="wcag.challenge_p3">
+              Our tutor saw the opportunity. With nearly 20 designers/students in the room at the same time (something that rarely happens), we used it to give something back. Each group took a section of WCAG and tried to explain it as clearly and visually as possible.
+            </p>
+            <h3 data-i18n="wcag.role_h">My role</h3>
+            <p data-i18n="wcag.role_p1">
+              I owned section 3.2, Predictable, responsible for explaining it to a complete beginner. I
+              took the initiative to create illustrations for each section across the resource:
+              introduction, readable, predictable, and input assistance. I also produced visual
+              examples covering criteria 3.2.1 through 3.2.6, later handing 3.2.1 through 3.2.3 to a
+              teammate who joined the project later.
+            </p>
+            <p data-i18n="wcag.role_p2">
+              Beyond my own section, I was actively involved in shaping the overall structure and
+              format, contributing to how we built a consistent layout that worked across the whole
+              group's output.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="ttj-section ttj-block" data-section id="analysis">
+        <h2 class="ttj-section__heading"><span class="ttj-section__number">01</span> <span data-i18n="wcag.s01">Analysis</span></h2>
+        <p class="ttj-section__text" data-i18n="wcag.a1">
+          At first glance the WCAG website seems reasonable enough. But for someone who actually has to apply the guidelines, the cognitive load is significant. There are no visual examples. The text is dense and repetitive. It speaks in generalities, and when you dig into something like input assistance, you get more heavy explanation without any grounding in how it actually looks or works in practice.
+        </p>
+        <div class="kyr-stack" id="wcag-analysis-stack" aria-label="Analysis illustrations">
+          <!-- Filled by wcag-assets + case-study.js -->
+        </div>
+      </section>
+
+      <section class="ttj-section ttj-block" data-section id="design">
+        <h2 class="ttj-section__heading"><span class="ttj-section__number">02</span> <span data-i18n="wcag.s02">Design</span></h2>
+        <p class="ttj-section__text" data-i18n="wcag.a2">
+          We know people understand rules better when they can see them. So we structured our section around two things: clear visual examples, and short contextual explanations built on a simple pattern — what should be true, and why it matters. From there we designed introductions, illustrations, and cards that made each guideline tangible rather than theoretical.
+        </p>
+        <div class="kyr-stack" id="wcag-design-stack" aria-label="Design boards">
+          <!-- Filled by wcag-assets + case-study.js -->
+        </div>
+      </section>
+
+      <section class="ttj-section ttj-block" data-section id="result">
+        <h2 class="ttj-section__heading"><span class="ttj-section__number">03</span> <span data-i18n="wcag.s03">Result</span></h2>
+        <div class="kyr-stack" id="wcag-result-stack" aria-label="Result boards">
+          <!-- Filled by wcag-assets + case-study.js -->
+        </div>
+      </section>
+
+      <section class="ttj-section ttj-block" data-section id="retrospective">
+        <h2 class="ttj-section__heading"><span class="ttj-section__number">04</span> <span data-i18n="wcag.s04">Retrospective</span></h2>
+        <div class="ttj-retro ttj-retro--blurred" id="retro">
+          <img
+            class="ttj-img"
+            src="/images/ttj/retro-notes.jpg?v=ttjretro1"
+            data-local="/images/ttj/retro-notes.jpg?v=ttjretro1"
+            alt="Process notebook"
+            width="1572"
+            height="1120"
+          />
+          <form class="ttj-retro__unlock" id="unlock-form">
+            <p data-i18n="wcag.unlock">Enter the 6-digit code to view the full process</p>
+            <input id="unlock-code" type="text" inputmode="numeric" maxlength="6" placeholder="••••••" aria-label="Unlock code" />
+            <button type="submit" data-i18n="wcag.unlock_btn">Unlock</button>
+            <span id="unlock-error" hidden data-i18n="wcag.unlock_err">Incorrect code</span>
+          </form>
+        </div>
+        <p class="ttj-section__text" data-i18n="wcag.retro_p">
+          If you have received my visit card, there is a code written that will give you access to view my documented process on paper. I sketch to have a database that allows me to extract previous info and make better planning in the future.
+        </p>
+      </section>
+
+      <section
+        class="ttj-next"
+        data-section
+        id="next"
+        style="background:#ff5100;color:#111;width:100%;margin:80px 0 0;padding:64px 0 100px;box-sizing:border-box;border-radius:28px 28px 0 0;"
+      >
+        <h2 data-i18n="wcag.next">Next project</h2>
+        <a class="ttj-next__card" href="/our-fjord.html">
+          <div class="ttj-next__visual">
+            <img
+              data-cover="ourFjord"
+              src="/images/covers/our-fjord.png?v=ofof29"
+              alt=""
+              width="1024"
+              height="1024"
+            />
+          </div>
+          <div class="ttj-next__copy">
+            <p class="ttj-next__eyebrow">“Our Fjord, Our Future”</p>
+            <p class="ttj-next__title" data-i18n="wcag.next_title">Connect solutions to save the Oslo Fjord.</p>
+          </div>
+        </a>
+      </section>
+    </div>
+
+    <p class="site-live-count" aria-live="polite" hidden>
+      <span data-visitor-count></span>
+      <span data-i18n="utils.visiting">visiting</span>
+    </p>
+
+    <script src="/js/case-study-images.js?v=me1"></script>
+    <script src="/js/translations.js?v=devices1"></script>
+    <script src="/js/i18n.js?v=phonetop4"></script>
+    <script src="/js/theme.js"></script>
+    <script src="/js/site-utils.js?v=phonetop4"></script>
+    <script src="/js/site-mail.js?v=phonetop4"></script>
+    <script src="/js/presence.js?v=livecount2"></script>
+    <script src="/js/site-nav.js?v=mouthfix2"></script>
+    <script src="/js/keyboard-nav.js?v=stops2"></script>
+    <script type="module" src="/js/me-assets.js?v=me1"></script>
+    <script type="module" src="/js/covers-assets.js?v=ofof29"></script>
+    <script type="module" src="/js/wcag-assets.js?v=wcag33"></script>
+    <script src="/js/watermark.js?v=wm5"></script>
+    <script src="/js/case-study.js?v=unlock190670"></script>
+    <script>
+      (function wcagOtherGroups() {
+        const toggle = document.getElementById("wcag-other-groups-toggle");
+        const panel = document.getElementById("wcag-other-groups-panel");
+        if (!toggle || !panel) return;
+
+        toggle.addEventListener("click", function () {
+          const open = toggle.getAttribute("aria-expanded") !== "true";
+          toggle.setAttribute("aria-expanded", open ? "true" : "false");
+          panel.hidden = !open;
+        });
+      })();
+    </script>
+    <script src="/js/content-guard.js?v=6"></script>
+  </body>
+</html>
