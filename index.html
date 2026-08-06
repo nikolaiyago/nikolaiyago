@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>document.documentElement.setAttribute("data-theme",localStorage.getItem("portfolio-theme")||"dark");</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/images/logo.png?v=logo6" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=logo6" />
+    <title>Nikolai Yago Conde — Home</title>
+
+    <!-- Google fonts for body text (Bison is local in /fonts) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=Poppins:wght@600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles: base first, then this page -->
+    <link rel="stylesheet" href="/css/base.css?v=mailfab1" />
+    <link rel="stylesheet" href="/css/home.css?v=aboutcenter2" />
+  </head>
+  <body>
+    <!--
+      ============================================
+      HOME PAGE (index.html)
+      ============================================
+
+      STRUCTURE
+        1. Expanding logo nav (.site-nav) — Me / Case Studies / Collection
+        2. Utils (.site-utils) — NO·ENG·ESP · visitors · theme (+ mail in panel)
+             Desktop: frosted top-right; mail FAB bottom-right
+             Phone: top-left tiger + orange utils row (lang | theme | live | mail)
+        3. Snap sections inside #home-page:
+             Hero → About
+        4. Mail button (#copy-email) lives in utils panel — copies / mailto
+
+      KEYBOARD
+        Tab = jump sections · Enter = controls inside · Esc = back out
+
+      SCRIPTS (bottom of this file, in order)
+        translations → i18n → theme → presence → site-nav → keyboard-nav → home
+    -->
+
+    <!-- Expanding logo nav — hover to choose Me / Case Studies / Collection -->
+    <nav class="site-nav" aria-label="Primary">
+      <div class="site-nav__shell">
+                <span class="site-nav__logo" aria-hidden="true">
+          <img
+            src="/images/logo.svg?v=logo7"
+            alt=""
+            width="80"
+            height="80"
+          />
+        </span>
+        <div class="site-nav__mouth">
+          <div class="site-nav__menu">
+            <a class="site-nav__link" data-nav="me" href="/index.html" data-i18n="nav.me">Me</a>
+            <a class="site-nav__link" data-nav="cases" href="/case-studies.html" aria-label="Case Studies"><span class="site-nav__link-line">Case</span><span class="site-nav__link-line">Studies</span></a>
+            <a class="site-nav__link" data-nav="collection" href="/collection.html" data-i18n="nav.collection">Collection</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!--
+      Top-right utilities (outside .home-page so fixed positioning isn't
+      trapped by the Me scroll container)
+      Desktop: language · live visitors · theme in a row; mail FAB bottom-right
+      Phone: top-left tiger + orange utils row (lang | theme | live | mail)
+    -->
+    <div class="site-utils" aria-label="Site utilities">
+      <button
+        type="button"
+        class="site-utils__menu-btn"
+        data-utils-open
+        aria-expanded="false"
+        aria-controls="site-utils-panel"
+        data-i18n-attr="aria-label:utils.menu"
+      >
+        <span class="site-utils__menu-icon" aria-hidden="true"></span>
+      </button>
+
+      <div class="site-utils__panel" id="site-utils-panel">
+        <button
+          type="button"
+          class="site-utils__close"
+          data-utils-close
+          data-i18n-attr="aria-label:utils.close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+
+        <div class="site-utils__langs" role="group" data-i18n-attr="aria-label:utils.lang">
+          <button type="button" class="site-utils__lang" data-lang="NO">NO</button>
+          <button type="button" class="site-utils__lang" data-lang="ENG">ENG</button>
+          <button type="button" class="site-utils__lang" data-lang="ESP">ESP</button>
+        </div>
+
+        <button type="button" class="site-utils__theme" data-theme-toggle aria-label="Theme">
+          <span class="site-utils__theme-icon" aria-hidden="true"></span>
+          <span data-theme-label data-i18n="utils.dark">Dark</span>
+        </button>
+
+        <!-- Mail: phone dock segment; desktop fixed FAB (position:fixed escapes panel) -->
+        <button
+          type="button"
+          class="home-mail"
+          id="copy-email"
+          data-email="nikolaiconde@gmail.com"
+          data-i18n-attr="aria-label:home.email"
+        >
+          <span class="home-mail__label" aria-live="polite">
+            <svg class="home-mail__copy-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="8" y="8" width="12" height="12" rx="2.5" stroke="currentColor" stroke-width="2" />
+              <path
+                d="M6 14.5V6.5A2.5 2.5 0 0 1 8.5 4H16"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            <span data-i18n="home.email_copied">Email Copied</span>
+          </span>
+          <span class="home-mail__icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="2" />
+              <path
+                d="M4 7.5 12 13l8-5.5"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Scroll container: snap happens here, not on the window -->
+    <div class="home-page" id="home-page">
+
+    <!-- SECTION 1: Hero — desktop Figma 998:2006 · phone Figma 1003:5088 -->
+    <section class="home-hero home-snap" data-section data-snap-section id="hero">
+      <div class="home-hero__flame" aria-hidden="true">
+        <img
+          class="home-hero__flame-img home-hero__flame-img--desktop home-hero__flame-img--dark"
+          src="/images/me/flame-pattern.svg?v=flamedark1"
+          alt=""
+          width="2048"
+          height="2048"
+        />
+        <img
+          class="home-hero__flame-img home-hero__flame-img--desktop home-hero__flame-img--light"
+          src="/images/me/flame-pattern-light.svg?v=flamelight2"
+          alt=""
+          width="2048"
+          height="2048"
+        />
+        <img
+          class="home-hero__flame-img home-hero__flame-img--phone home-hero__flame-img--dark"
+          src="/images/me/figma-phone/union.svg?v=phonefigma5"
+          alt=""
+          width="2048"
+          height="2048"
+        />
+        <img
+          class="home-hero__flame-img home-hero__flame-img--phone home-hero__flame-img--light"
+          src="/images/me/figma-phone/union-light.svg?v=flamelight2"
+          alt=""
+          width="2048"
+          height="2048"
+        />
+      </div>
+      <div class="home-hero__stage">
+        <div class="home-hero__copy">
+          <h1 class="home-hero__name">
+            <span>Nikolai </span>
+            <span>COnde</span>
+          </h1>
+        </div>
+        <div class="home-hero__media">
+          <img
+            class="home-hero__portrait home-hero__portrait--desktop"
+            src="/images/me/portrait-desktop.png?v=transparentbg1"
+            alt="Nikolai Yago Conde"
+          />
+          <div class="home-hero__portrait-frame">
+            <img
+              class="home-hero__portrait home-hero__portrait--phone"
+              src="/images/me/figma-phone/portrait.png?v=phonefigma2"
+              alt="Nikolai Yago Conde"
+            />
+          </div>
+          <a class="home-hero__more" href="#about">
+            <span data-i18n="home.read_more">Read More</span>
+            <img
+              class="home-hero__more-icon"
+              src="/images/me/figma-phone/chevron-bottom.svg?v=phonefigma2b"
+              alt=""
+              width="18"
+              height="18"
+              aria-hidden="true"
+            />
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: About me -->
+    <section class="home-about home-snap" data-section data-snap-section id="about">
+      <div class="home-about__copy">
+        <h2 class="home-section-title" data-i18n="home.about_title">About me</h2>
+        <div class="home-about__text">
+          <p data-i18n="home.about_p1">
+            I'm a Norwegian interaction and systems designer based in Oslo,
+            currently completing my master's at AHO.
+          </p>
+          <p data-i18n="home.about_p2">
+            Curious by nature, process-driven by practice. I believe good design
+            starts with understanding real people, and ends with something with
+            impact and quality. I love to draw, explore, and meet the people I'm
+            designing for.
+          </p>
+        </div>
+        <div class="home-about__actions">
+          <a class="home-pill home-pill--orange" href="/case-studies.html" data-i18n="home.case_studies">Case Studies</a>
+          <a class="home-pill home-pill--white" href="/collection.html">
+            <span class="home-pill__desktop" data-i18n="home.collection">Collection</span>
+            <span class="home-pill__phone" data-i18n="home.more_work">More work</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    </div><!-- /.home-page -->
+
+    <p class="site-live-count" aria-live="polite" hidden>
+      <span data-visitor-count></span>
+      <span data-i18n="utils.visiting">visiting</span>
+    </p>
+
+    <script src="/js/translations.js?v=devices1"></script>
+    <script src="/js/i18n.js?v=phonetop4"></script>
+    <script src="/js/theme.js"></script>
+    <script src="/js/site-utils.js?v=phonetop4"></script>
+    <script src="/js/presence.js?v=livecount2"></script>
+    <script src="/js/site-nav.js?v=mouthfix2"></script>
+    <script src="/js/site-mail.js?v=phonetop4"></script>
+    <script src="/js/keyboard-nav.js?v=stops2"></script>
+    <script src="/js/home.js?v=nocontact2"></script>
+    <script type="module" src="/js/me-assets.js?v=phonefigma2"></script>
+    <script src="/js/content-guard.js?v=6"></script>
+  </body>
+</html>
